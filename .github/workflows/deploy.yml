@@ -20,7 +20,7 @@ jobs:
       - name: Configura Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm' # Cambia in 'pnpm' o 'yarn' se usi altri package manager
 
       - name: Installa le dipendenze
