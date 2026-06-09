@@ -1,0 +1,392 @@
+---
+// Header.astro - Fix definitivo per il glitch del logo gigante allo scroll
+---
+
+<nav class="main-header" id="globalHeader">
+  <div class="header-container">
+    
+    <a href="/" class="brand-logo" aria-label="Sambo Bike Rent Home">
+      <div class="logo-wrapper">
+        <img src="/images/Sambo Bike Rent Logo Orizzontale White PNG.png" alt="Sambo Bike Rent" class="logo-img logo-white" />
+        <img src="/images/Sambo Bike Rent Logo Orizzontale Black PNG.png" alt="Sambo Bike Rent" class="logo-img logo-black" />
+      </div>
+    </a>
+
+    <ul class="nav-menu" id="navMenu">
+      <li class="nav-item"><a href="#about" class="nav-link">Chi Siamo</a></li>
+      <li class="nav-item"><a href="#showcase" class="nav-link">Le Bici</a></li>
+      <li class="nav-item"><a href="#incluso" class="nav-link">Incluso</a></li>
+      <li class="nav-item"><a href="#contatti" class="nav-link">Contatti</a></li>
+      <li class="nav-item mobile-cta-item"><a href="#prenota" class="btn-header mobile-popup-cta">Prenota Ora</a></li>
+    </ul>
+
+    <div class="header-actions">
+      <a href="#prenota" class="btn-header desktop-cta">Prenota Ora</a>
+      
+      <button class="hamburger-btn" id="mobileMenuBtn" aria-label="Apri Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<script>
+  function initHeaderLogic() {
+    const header = document.getElementById('globalHeader');
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const menu = document.getElementById('navMenu');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-popup-cta');
+
+    let lastScrollY = window.scrollY;
+
+    if (!header) return;
+
+    // Stato iniziale al caricamento della pagina (se l'utente rinfresca a metà pagina)
+    if (window.scrollY > 40) {
+      header.classList.add('header-scrolled');
+    }
+
+    window.addEventListener('scroll', () => {
+      if (menu && menu.classList.contains('menu-open')) return;
+
+      const currentScrollY = window.scrollY;
+
+      // Scomparsa/Apparizione intelligente
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        header.classList.add('header-hidden');
+      } else {
+        header.classList.remove('header-hidden');
+      }
+
+      // Cambio stato background e logo
+      if (currentScrollY > 40) {
+        header.classList.add('header-scrolled');
+      } else {
+        header.classList.remove('header-scrolled');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+
+    if (menuBtn && menu) {
+      menuBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = menu.classList.contains('menu-open');
+        
+        menuBtn.classList.toggle('is-active');
+        menu.classList.toggle('menu-open');
+        document.body.classList.toggle('no-scroll');
+
+        if (!isOpen) {
+          header.classList.remove('header-hidden');
+          header.classList.add('header-scrolled');
+          header.classList.add('mobile-menu-active');
+        } else {
+          header.classList.remove('mobile-menu-active');
+          if (window.scrollY <= 40) {
+            header.classList.remove('header-scrolled');
+          }
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (menuBtn && menu) {
+            menuBtn.classList.remove('is-active');
+            menu.classList.remove('menu-open');
+            document.body.classList.remove('no-scroll');
+            header.classList.remove('mobile-menu-active');
+          }
+        });
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initHeaderLogic);
+  document.addEventListener('astro:page-load', initHeaderLogic);
+</script>
+
+<style>
+  /* ==========================================
+     STRUTTURA DESKTOP BASE
+     ========================================== */
+  .main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px 0;
+    background-color: transparent;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, padding 0.3s ease;
+    will-change: transform, background-color, padding;
+  }
+
+  .main-header.header-scrolled {
+    padding: 14px 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .main-header.header-scrolled .nav-link {
+    color: #111111;
+  }
+
+  .main-header.header-hidden {
+    transform: translateY(-100%);
+  }
+
+  .header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  /* ==========================================
+     FIX LOGO: Struttura rigida anti-glitch
+     ========================================== */
+  .brand-logo {
+    display: block;
+    z-index: 120; 
+    width: 180px; /* Definisce la larghezza fissa dell'area logo */
+    min-width: 180px;
+    text-decoration: none;
+  }
+
+  .logo-wrapper {
+    position: relative;
+    width: 100%;
+    height: 45px; /* Definisce l'altezza fissa per bloccare il resizing */
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Forza l'immagine a stare dentro i limiti impostati */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    will-change: opacity;
+  }
+
+  /* Stato iniziale (In cima alla pagina) */
+  .logo-white {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .logo-black {
+    opacity: 0;
+    z-index: 1;
+  }
+
+  /* Stato Scrolled (Quando scendi con la pagina) */
+  .main-header.header-scrolled .logo-white {
+    opacity: 0;
+  }
+
+  .main-header.header-scrolled .logo-black {
+    opacity: 1;
+  }
+
+  /* Stato quando il Menu Mobile è Aperto */
+  .main-header.mobile-menu-active .logo-white {
+    opacity: 0 !important;
+  }
+
+  .main-header.mobile-menu-active .logo-black {
+    opacity: 1 !important;
+  }
+
+  /* ==========================================
+     ELEMENTI MENU DI NAVIGAZIONE
+     ========================================== */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-cta-item { display: none; }
+
+  .nav-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: #111111;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .main-header:not(.header-scrolled) .nav-link::after { background-color: #ffffff; }
+  .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .btn-header {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    background-color: #111111;
+    color: #ffffff !important;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .main-header:not(.header-scrolled) .btn-header {
+    background-color: #ffffff;
+    color: #111111 !important;
+  }
+
+  .hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22px;
+    height: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 120;
+  }
+
+  .hamburger-btn .bar {
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background-color 0.3s ease;
+  }
+
+  .main-header.header-scrolled .hamburger-btn .bar { background-color: #111111; }
+
+  .hamburger-btn.is-active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: #111111 !important; }
+  .hamburger-btn.is-active .bar:nth-child(2) { opacity: 0; }
+  .hamburger-btn.is-active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: #111111 !important; }
+
+  /* ==========================================
+     RESPONSIVE INTERFACCIA MOBILE
+     ========================================== */
+  @media (max-width: 1024px) {
+    .header-container { padding: 0 24px; }
+    .nav-menu { gap: 24px; }
+    .brand-logo { width: 150px; min-width: 150px; }
+    .logo-wrapper { height: 38px; }
+  }
+
+  @media (max-width: 768px) {
+    .main-header { padding: 16px 0; }
+    .hamburger-btn { display: flex; } 
+    .btn-header.desktop-cta { display: none; } 
+
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100svh; 
+      background-color: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      padding: 40px;
+      box-sizing: border-box;
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 105;
+    }
+
+    .nav-menu.menu-open { transform: translateX(0); }
+
+    .mobile-cta-item {
+      display: block; 
+      width: 100%;
+      max-width: 260px;
+      margin-top: 15px;
+    }
+
+    .mobile-popup-cta {
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      padding: 14px 0;
+      font-size: 0.9rem;
+    }
+
+    .nav-item {
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .nav-menu.menu-open .nav-item { opacity: 1; transform: translateY(0); }
+    .nav-menu.menu-open .nav-item:nth-child(1) { transition-delay: 0.15s; }
+    .nav-menu.menu-open .nav-item:nth-child(2) { transition-delay: 0.22s; }
+    .nav-menu.menu-open .nav-item:nth-child(3) { transition-delay: 0.29s; }
+    .nav-menu.menu-open .nav-item:nth-child(4) { transition-delay: 0.36s; }
+    .nav-menu.menu-open .nav-item:nth-child(5) { transition-delay: 0.43s; }
+
+    .nav-link {
+      color: #111111 !important;
+      font-size: 1.5rem; 
+      font-weight: 600;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .nav-link::after { display: none; } 
+  }
+
+  :global(body.no-scroll) {
+    overflow: hidden;
+  }
+</style>

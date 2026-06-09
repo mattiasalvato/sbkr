@@ -1,0 +1,548 @@
+---
+// Seconda Sezione: Introduzione / Filosofia del Noleggio con Sentiero Cartografico Decathlon ed Effetti Interattivi Avanzati
+---
+
+<div class="about-scroll-trigger" id="about">
+  <section class="about-section">
+    
+    <div class="trail-line-container" aria-hidden="true">
+      <svg viewBox="0 0 1440 1600" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path 
+          d="M 1440,60 L 1320,60 L 1220,110 L 1290,150 L 1150,200 L 1050,200 L 1000,260 L 1040,310 L 900,380 L 800,380 L 710,450 L 790,500 L 650,580 L 550,580 L 460,650 L 530,700 L 390,780 L 290,780 L 200,860 L 280,910 L 150,1000 L 80,1000 L 600,1080 L 500,1100 L 550,1150 L 550,1175 L 700,1200 L 650,1250 L 900,1300 L 1100,1540 L 1400,1640"
+          stroke="#e5e5e5" 
+          stroke-width="1"
+        />
+        <path 
+          id="trailPathActive"
+          d="M 1440,60 L 1320,60 L 1220,110 L 1290,150 L 1150,200 L 1050,200 L 1000,260 L 1040,310 L 900,380 L 800,380 L 710,450 L 790,500 L 650,580 L 550,580 L 460,650 L 530,700 L 390,780 L 290,780 L 200,860 L 280,910 L 150,1000 L 80,1000 L 600,1080 L 500,1100 L 550,1150 L 550,1175 L 700,1200 L 650,1250 L 900,1300 L 1100,1540 L 1400,1640"
+          stroke="#111111" 
+          stroke-width="1"
+        />
+      </svg>
+    </div>
+
+    <div class="grid-layout-bleed align-top">
+      <div class="text-block parallax-element reveal-text" data-speed="0.02">
+        <h2 class="main-heading">
+          Le nostre e-bike sono lo strumento definitivo per explorar il territorio, dove la tecnologia incontra la natura.
+        </h2>
+        
+        <div class="secondary-text">
+          <p>
+            Selezioniamo solo mountain bike ed e-bike di ultima generazione per garantirti il massimo del comfort e delle prestazioni su qualsiasi tipo di percorso. Che tu voglia sfidare i sentieri più ripidi o goderti una pedalata rilassante tra le colline, abbiamo la bici perfetta per la tua prossima avventura.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="image-block-one-bleed parallax-element reveal-image" data-speed="-0.06">
+        <div class="image-wrapper-bleed ken-burns tilt-target">
+          <img src="/images/about-bike-1.webp" alt="Dettaglio e-bike pronta all'avventura" class="interactive-img" />
+        </div>
+      </div>
+    </div>
+
+    <div class="container lower-grid">
+      <div class="image-block-two parallax-element reveal-image" data-speed="0.05">
+        <div class="image-wrapper ken-burns tilt-target">
+          <img src="/images/about-bike-2.webp" alt="Ciclista sui sentieri" class="interactive-img" />
+        </div>
+      </div>
+      <div class="third-text parallax-element reveal-text" data-speed="-0.02">
+        <p>
+          Selezioniamo solo mountain bike ed e-bike di ultima generazione per garantirti il massimo del comfort e delle prestazioni su qualsiasi tipo di percorso. Che tu voglia sfidare i sentieri più ripidi o goderti una pedalata rilassante tra le colline, abbiamo la bici perfetta per la tua prossima avventura.
+        </p>
+      </div>
+    </div>
+
+    <div class="container lower-grid">
+      <div class="fourth-text parallax-element reveal-text" data-speed="0.03">
+        <p>
+          Selezioniamo solo mountain bike ed e-bike di ultima generazione per garantirti il massimo del comfort e delle prestazioni su qualsiasi tipo di percorso. Che tu voglia sfidare i sentieri più ripidi o goderti una pedalata rilassante tra le colline, abbiamo la bici perfetta per la tua prossima avventura.
+        </p>
+      </div>
+      <div class="image-block-three parallax-element reveal-image" data-speed="-0.05">
+        <div class="image-wrapper ken-burns tilt-target">
+          <img src="/images/about-bike-3.webp" alt="Trekking sui sentieri" class="interactive-img" />
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<script>
+  function initAboutEffects() {
+    const container = document.getElementById('about');
+    const pathActive = document.getElementById('trailPathActive') as SVGPathElement | null;
+    const parallaxElements = document.querySelectorAll('.parallax-element') as NodeListOf<HTMLElement>;
+    const tiltElements = document.querySelectorAll('.tilt-target') as NodeListOf<HTMLElement>;
+    
+    if (!container) return;
+
+    // 1. Setup Linea SVG Attiva
+    let pathLength = 0;
+    if (pathActive) {
+      pathLength = pathActive.getTotalLength();
+      pathActive.style.strokeDasharray = `${pathLength} ${pathLength}`;
+      pathActive.style.strokeDashoffset = `${pathLength}`;
+    }
+
+    // 2. Intersection Observer per gli effetti di Reveal all'ingresso dello Scroll
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active-reveal');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal-text, .reveal-image').forEach(el => revealObserver.observe(el));
+
+    // 3. Effetto Card Tilt 3D al movimento del mouse (Desktop)
+    if (window.innerWidth > 1024) {
+      tiltElements.forEach((wrapper) => {
+        wrapper.addEventListener('mousemove', (e: MouseEvent) => {
+          const rect = wrapper.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const xc = rect.width / 2;
+          const yc = rect.height / 2;
+          
+          const angleX = (yc - y) / 25; // Sensibilità verticale
+          const angleY = (x - xc) / 25; // Sensibilità orizzontale
+          
+          wrapper.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+          wrapper.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+      });
+    }
+
+    // 4. Ciclo di Rendering ad alte prestazioni (Parallasse + Disegno SVG)
+    function updateFrame() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      const containerRect = container!.getBoundingClientRect();
+      const containerTop = containerRect.top + scrollY;
+      const containerHeight = containerRect.height;
+
+      // Movimento di Parallasse dei blocchi
+      parallaxElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const elementTop = rect.top + scrollY;
+        
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          const speed = parseFloat(el.getAttribute('data-speed') || '0');
+          const centerOffset = (scrollY + windowHeight / 2) - (elementTop + rect.height / 2);
+          const translateY = centerOffset * speed;
+          
+          // Se l'elemento ha anche effetti 3D di tilt attivi, preserviamo il transform o usiamo il dataset
+          if (el.classList.contains('reveal-image')) {
+            el.style.transform = `translate3d(0, ${translateY}px, 0)`;
+          } else {
+            el.style.transform = `translate3d(0, ${translateY}px, 0)`;
+          }
+        }
+      });
+
+      // Avanzamento disegno linea vincolato allo scroll della sezione
+      if (pathActive) {
+        const startScroll = containerTop - windowHeight;
+        const endScroll = containerTop + containerHeight - windowHeight / 1.5;
+        
+        if (scrollY >= startScroll && scrollY <= endScroll) {
+          const sectionScrolled = scrollY - startScroll;
+          const totalSectionScrollable = endScroll - startScroll;
+          const progress = Math.min(Math.max(sectionScrolled / totalSectionScrollable, 0), 1);
+          
+          pathActive!.style.strokeDashoffset = `${pathLength - (pathLength * progress)}`;
+        } else if (scrollY < startScroll) {
+          pathActive!.style.strokeDashoffset = `${pathLength}`;
+        } else if (scrollY > endScroll) {
+          pathActive!.style.strokeDashoffset = '0';
+        }
+      }
+
+      requestAnimationFrame(updateFrame);
+    }
+
+    window.addEventListener('resize', () => {
+      if (pathActive) {
+        pathLength = pathActive.getTotalLength();
+        pathActive.style.strokeDasharray = `${pathLength} ${pathLength}`;
+      }
+    });
+
+    requestAnimationFrame(updateFrame);
+  }
+
+  document.addEventListener('DOMContentLoaded', initAboutEffects);
+  window.addEventListener('load', initAboutEffects);
+</script>
+
+<style>
+  .about-scroll-trigger {
+    width: 100%;
+    background-color: #D8D5CD;
+  }
+
+  .about-section {
+    position: relative; 
+    padding: 140px 0; 
+    overflow: hidden; 
+    font-family: 'Inter', sans-serif;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2; 
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .grid-layout-bleed {
+    position: relative;
+    z-index: 2; 
+    display: grid;
+    grid-template-columns: calc(50vw - 100px) 1fr; 
+    gap: 60px;
+    margin-bottom: 120px;
+  }
+
+  .grid-layout-bleed.align-top {
+    align-items: flex-start;
+  }
+
+  /* ==========================================
+      STRUTTURA E STILI ANIMAZIONI IN INGRESSO (REVEAL)
+     ========================================== */
+  .parallax-element {
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Animazione di emersione del testo */
+  .reveal-text {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-text.active-reveal {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Animazione di espansione a maschera per le immagini */
+  .reveal-image {
+    opacity: 0;
+    clip-path: inset(10% 10% 10% 10% round 24px);
+    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-image.active-reveal {
+    opacity: 1;
+    clip-path: inset(0% 0% 0% 0% round 24px);
+  }
+
+  /* Contenitore per il Mouse Tilt 3D */
+  .tilt-target {
+    will-change: transform;
+    transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
+  }
+
+  .interactive-img {
+    transform: translateZ(20px); 
+  }
+
+  /* TESTI */
+  .text-block {
+    grid-column: 1;
+    justify-self: end;
+    max-width: 800px;
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .main-heading {
+    font-size: clamp(2.4rem, 4.5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: #111;
+    letter-spacing: -0.02em;
+    margin-bottom: 30px;
+  }
+
+  .secondary-text {
+    max-width: 600px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 40px;
+  }
+
+  .third-text, .fourth-text {
+    max-width: 600px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    padding-top: 80px;
+    padding-left: 150px;
+  }
+
+  /* Scroll Down Indicator */
+  .scroll-down-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.7;
+    margin-top: 20px;
+  }
+
+  .handwritten-scroll {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: #111;
+  }
+
+  .scroll-arrow {
+    animation: bounceVertical 2s infinite ease-in-out;
+  }
+
+  @keyframes bounceVertical {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* EFFETTO PAN CONTINUO IMMAGINI (KEN BURNS) */
+  .ken-burns {
+    overflow: hidden;
+  }
+
+  .ken-burns img {
+    animation: continuousPan 30s infinite alternate ease-in-out;
+    will-change: transform;
+  }
+
+  @keyframes continuousPan {
+    0% { transform: scale(1.02) translate(0, 0); }
+    100% { transform: scale(1.1) translate(-1%, -0.5%); }
+  }
+
+  /* STRUTTURA GRIGLIE IMMAGINI */
+  .image-block-one-bleed {
+    grid-column: 2;
+    width: 100%;
+  }
+
+  .image-wrapper-bleed {
+    overflow: hidden;
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+    width: 100%;
+    height: 650px;
+  }
+
+  .image-wrapper-bleed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lower-grid {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .image-wrapper {
+    overflow: hidden;
+    border-radius: 24px; 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+    width: 100%;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .image-block-two {
+    grid-column: 1 / 2;
+    max-width: 65%;
+  }
+
+  .image-block-three {
+    grid-column: 2; 
+    max-width: 65%;
+    margin-left: auto; 
+  }
+
+  /* GESTIONE SENTIERO SVG TRACCIATO */
+  .trail-line-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    pointer-events: none; 
+  }
+
+  .trail-line-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .trail-line-container path {
+    will-change: stroke-dashoffset;
+    transition: stroke-dashoffset 0.04s linear;
+  }
+
+  /* ==========================================
+     MEDIA QUERIES - RESPONSIVE DI PRECISIONE
+     ========================================== */
+  
+  /* Breakpoint per schermi laptop medi/piccoli */
+  @media (max-width: 1199px) {
+    .grid-layout-bleed {
+      gap: 40px;
+    }
+    .third-text, .fourth-text {
+      padding-left: 60px; /* Ridotto per evitare collassi del testo */
+    }
+    .image-block-two, .image-block-three {
+      max-width: 80%; /* Allarghiamo leggermente le immagini per bilanciare lo spazio */
+    }
+  }
+
+  /* Breakpoint per Tablet (Modalità due colonne al limite, passaggio a una colonna) */
+  @media (max-width: 1024px) {
+    .about-section { 
+      padding: 100px 0; 
+    }
+    
+    .container {
+      padding: 0 32px;
+    }
+
+    .grid-layout-bleed { 
+      grid-template-columns: 1fr; 
+      gap: 40px; 
+      padding: 0 32px; 
+      margin-bottom: 80px; 
+    }
+
+    .text-block { 
+      grid-column: 1;
+      justify-self: start; 
+      max-width: 100%; 
+      padding-left: 0; 
+    }
+
+    .image-block-one-bleed { 
+      grid-column: 1; 
+    }
+
+    .image-wrapper-bleed { 
+      height: 480px; 
+      /* Diventa simmetrico quando va a colonna singola */
+      border-radius: 24px; 
+    }
+
+    .lower-grid { 
+      grid-template-columns: 1fr; 
+      margin-top: 60px;
+      gap: 30px;
+    }
+
+    .third-text, .fourth-text { 
+      padding: 10px 0 0 0; 
+      max-width: 100%; 
+    }
+
+    /* Invertiamo l'ordine visivo della terza griglia per far stare il testo sempre sopra o sotto l'immagine in modo coerente */
+    .lower-grid:last-of-type {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .image-block-two, .image-block-three { 
+      grid-column: 1 / -1; 
+      max-width: 100%; 
+      margin-left: 0; 
+    }
+
+    .scroll-down-indicator { 
+      display: none; /* Rimosso sui dispositivi touch */
+    }
+  }
+
+  /* Breakpoint per Smartphone (Ottimizzazione performance e stabilità) */
+  @media (max-width: 768px) {
+    .about-section { 
+      padding: 80px 0; 
+    }
+
+    .container, .grid-layout-bleed {
+      padding: 0 20px;
+    }
+
+    .main-heading {
+      line-height: 1.3;
+    }
+
+    .secondary-text, .third-text, .fourth-text {
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .image-wrapper-bleed {
+      height: 350px;
+    }
+    
+
+    .reveal-text, .reveal-image { 
+      opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .reveal-text.active-reveal, .reveal-image.active-reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+    .parallax-element { 
+      transform: none !important; 
+    }
+    
+    .ken-burns img { 
+      animation: none !important; 
+      transform: none !important;
+    }
+    
+    .tilt-target { 
+      transform: none !important; 
+    }
+
+    /* Nascondiamo l'SVG su mobile perché i cambi di coordinate fissi su layout a colonna singola fluida si sfaserebbero */
+    .trail-line-container {
+      display: none;
+    }
+
+    
+  }
+</style>

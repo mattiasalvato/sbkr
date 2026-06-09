@@ -1,0 +1,244 @@
+---
+// Sezione Impatto: offer.astro con Parallasse, Word Reveal e Responsive Blindato
+---
+
+<header class="offer-container" id="offerSection">
+  <div class="offer-bg" id="offerBg">
+    <img src="/images/offer-background.jpg" alt="Esplora in bicicletta" />
+    <div class="overlay"></div>
+  </div>
+
+  <div class="offer-content">
+    <h1 class="offer-title">
+      <span class="reveal-wrapper">
+        <span class="reveal-word">Lorem</span>
+      </span>
+      <span class="reveal-wrapper">
+        <span class="reveal-word">ipsum</span>
+      </span>
+      <span class="reveal-wrapper">
+        <span class="reveal-word italic-title shimmer-effect">dolor</span>
+      </span>
+      <br/>
+      <span class="reveal-wrapper">
+        <span class="reveal-word">sit</span>
+      </span>
+      <span class="reveal-wrapper">
+        <span class="reveal-word">amet</span>
+      </span>
+      <span class="reveal-wrapper">
+        <span class="reveal-word italic-title shimmer-effect">init</span>
+      </span>
+    </h1>
+  </div>
+</header>
+
+<script>
+  function initOfferEffects() {
+    const offer = document.getElementById('offerSection');
+    const offerBg = document.getElementById('offerBg');
+    
+    if (!offer || !offerBg) return;
+
+    // 1. Attiva le animazioni d'ingresso (Word Reveal)
+    void offer.offsetWidth;
+    offer.classList.add('is-visible');
+
+    // 2. Parallasse intelligente basato sulla posizione reale della sezione (Solo Desktop)
+    if (window.innerWidth > 1024) {
+      window.addEventListener('scroll', () => {
+        const rect = offer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // Controlla se la sezione è visibile a schermo
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          // Calcola lo scroll interno relativo a questa sezione
+          const scrolledInside = window.scrollY - (rect.top + window.scrollY - windowHeight);
+          
+          // Applica lo spostamento mantenendo il margine di sicurezza del CSS
+          offerBg.style.transform = `translate3d(0, ${scrolledInside * 0.18}px, 0)`;
+        }
+      });
+    }
+  }
+
+  // Supporto Astro Lifecycle completo
+  document.addEventListener('DOMContentLoaded', initOfferEffects);
+  window.addEventListener('load', initOfferEffects);
+</script>
+
+<style>
+  /* ==========================================
+     CONTENITORE PRINCIPALE
+     ========================================== */
+  .offer-container {
+    position: relative;
+    height: 100vh;
+    height: 100dvh; /* Evita i salti di layout dovuti alle barre dinamiche mobile */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: #000000;
+  }
+
+  /* L'altezza al 140% e il top negativo creano il cuscino di sicurezza contro i bordi neri */
+  .offer-bg {
+    position: absolute;
+    top: -20%;
+    left: 0;
+    width: 100%;
+    height: 140%; 
+    z-index: 1;
+    will-change: transform;
+    overflow: hidden;
+  }
+
+  .offer-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block; 
+    transform: scale(1.1);
+    transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .offer-container.is-visible .offer-bg img {
+    animation: offerKenBurns 40s infinite alternate ease-in-out 1.5s;
+    transform: scale(1);
+  }
+
+  @keyframes offerKenBurns {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.08) translate(-0.5%, -0.5%); }
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 2;
+  }
+
+  /* ==========================================
+     ANIMAZIONE REVEAL DELLE PAROLE (WORD REVEAL)
+     ========================================== */
+  .offer-content {
+    position: relative;
+    z-index: 10; 
+    max-width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  .reveal-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    margin-right: 0.15em; 
+  }
+
+  .reveal-word {
+    display: inline-block;
+    transform: translateY(110%); 
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
+    will-change: transform, opacity;
+  }
+
+  .offer-container.is-visible .reveal-word {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Ritardi calcolati per la cascata (Stagger) */
+  .reveal-wrapper:nth-child(1) .reveal-word { transition-delay: 0.1s; }
+  .reveal-wrapper:nth-child(2) .reveal-word { transition-delay: 0.2s; }
+  .reveal-wrapper:nth-child(3) .reveal-word { transition-delay: 0.3s; } 
+  .reveal-wrapper:nth-child(5) .reveal-word { transition-delay: 0.45s; }
+  .reveal-wrapper:nth-child(6) .reveal-word { transition-delay: 0.55s; }
+  .reveal-wrapper:nth-child(7) .reveal-word { transition-delay: 0.65s; } 
+
+  /* ==========================================
+     TYPOGRAPHY & EFFETTO SHIMMER LUCE
+     ========================================== */
+  .offer-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.5rem, 7.5vw, 7.5rem); /* Scalabilità fluida ottimizzata */
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.03em;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .italic-title {
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .shimmer-effect {
+    position: relative;
+    background: linear-gradient(
+      to right,
+      #ffffff 20%,
+      #dbff9b 40%,
+      #dbff9b 60%,
+      #ffffff 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textShimmer 5s linear infinite;
+  }
+
+  @keyframes textShimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+
+  /* ==========================================
+     MEDIA QUERIES - RESPONSIVE DI PRECISIONE
+     ========================================== */
+  @media (max-width: 1024px) {
+    .offer-content {
+      padding: 0 24px;
+    }
+    /* Disattiva d'autorità lo spostamento del parallasse per stabilità sui dispositivi touch */
+    .offer-bg {
+      height: 100%; 
+      top: 0;
+      transform: none !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .offer-container {
+      height: 100vh;
+      height: 100svh; /* Aggancia il viewport mobile solido */
+    }
+    .offer-title {
+      line-height: 1.2;
+      font-size: clamp(2.3rem, 8vw, 3.5rem); /* Impedisce al titolo di collassare orizzontalmente */
+    }
+    .reveal-word {
+      /* Velocizza leggermente l'ascesa sui telefoni per dare più reattività */
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-out;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .offer-title {
+      line-height: 1.25;
+    }
+  }
+</style>

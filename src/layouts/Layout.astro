@@ -1,0 +1,72 @@
+---
+// src/layouts/Layout.astro
+interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Noleggio Bici" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		
+		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Caveat:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #000000; /* 👈 Sostituisci con il colore della sezione se vuoi che lo sfondo si fonda perfettamente */
+}
+
+
+ .reveal-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    margin-right: 0.15em; 
+  }
+
+  .reveal-word {
+    display: inline-block;
+    transform: translateY(110%); 
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
+    will-change: transform, opacity;
+  }
+
+  .offer-container.is-visible .reveal-word {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .reveal-wrapper:nth-child(1) .reveal-word { transition-delay: 0.1s; }
+  .reveal-wrapper:nth-child(2) .reveal-word { transition-delay: 0.2s; }
+  .reveal-wrapper:nth-child(3) .reveal-word { transition-delay: 0.3s; } 
+  .reveal-wrapper:nth-child(5) .reveal-word { transition-delay: 0.45s; }
+  .reveal-wrapper:nth-child(6) .reveal-word { transition-delay: 0.55s; }
+  .reveal-wrapper:nth-child(7) .reveal-word { transition-delay: 0.65s; } 
+</style>

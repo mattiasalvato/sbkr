@@ -1,0 +1,353 @@
+---
+// Sezione Contatti con animazione di ingresso, icone calibrate e responsive flessibile
+---
+
+<div class="contact-scroll-wrapper" id="contatti">
+  <section class="contact-section">
+    
+    <div class="contact-grid">
+      
+      <div class="contact-info-block">
+        <p class="section-badge">Contatti</p>
+        <h2 class="contact-title">Pronto per il <br/><span class="highlight">prossimo sentiero?</span></h2>
+        
+        <p class="contact-subtitle">
+          Il nostro team è a tua disposizione per consigli sugli itinerari, dettagli tecnici sulle e-bike o per personalizzare il tuo noleggio.
+        </p>
+
+        <div class="info-items">
+          <div class="info-item">
+            <div class="icon-circle"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="info-text">
+              <span>Posizione</span>
+              <p>Via Prova 2, San Bonifacio (VR)</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon-circle"><i class="fa-solid fa-phone"></i></div>
+            <div class="info-text">
+              <span>Telefono & WhatsApp</span>
+              <p>+39 045 7610955</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
+            <div class="info-text">
+              <span>Email</span>
+              <p>info@sambobikerent.it</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="annotation-contact">
+          <span class="handwritten">Ti rispondiamo in 24h</span>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <div class="form-card">
+          <p class="form-info-text">Invia la tua richiesta di prenotazione, verificheremo la disponibilità della flotta in pochi minuti e ti invieremo la conferma via mail/WhatsApp</p>
+          <div class="embed-placeholder">
+            <iframe data-tally-src="https://tally.so/embed/44OVYd?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="929" frameborder="0" marginheight="0" marginwidth="0" title="Sambo Bike Rent"></iframe>
+            <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>   
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<script>
+  function initContactAnimation() {
+    const section = document.getElementById('contatti');
+    if (section) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      observer.observe(section);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initContactAnimation);
+  window.addEventListener('load', initContactAnimation);
+</script>
+
+<style>
+  /* ==========================================
+     CONTENITORE E ZOOM INGRESSO
+     ========================================== */
+  .contact-scroll-wrapper {
+    width: 100%;
+    background-color: #D8D5CD;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
+    will-change: transform, opacity;
+  }
+
+  .contact-scroll-wrapper.is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ==========================================
+     LAYOUT STRUTTURALE
+     ========================================== */
+  .contact-section {
+    padding: 140px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: flex-start;
+  }
+
+  /* ==========================================
+     LATO TESTI (INFO)
+     ========================================== */
+  .contact-info-block {
+    position: sticky;
+    top: 100px; /* Rimane bloccato a lato se il form di Tally è molto lungo */
+  }
+
+  .section-badge {
+    color: #1d1d1d;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+  }
+
+  .contact-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #111;
+    margin: 0 0 30px 0;
+    letter-spacing: -0.03em;
+  }
+
+  .highlight {
+    font-style: italic;
+    font-weight: 400;
+    color: #111;
+  }
+
+  .contact-subtitle {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #444;
+    margin: 0 0 50px 0;
+    max-width: 500px;
+  }
+
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* FIX: Icone calibrate con contenitore proporzionato */
+  .icon-circle {
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #111;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+    flex-shrink: 0;
+  }
+
+  .info-text span {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #777;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .info-text p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111;
+    margin: 4px 0 0 0;
+  }
+
+  .annotation-contact {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .handwritten {
+    font-family: 'Caveat', cursive;
+    font-size: 1.7rem;
+    color: #1d1d1d;
+    font-weight: 600;
+  }
+
+  /* ==========================================
+     LATO FORM (CARD)
+     ========================================== */
+  .contact-form-container {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .form-card {
+    background: #ffffff;
+    padding: 48px;
+    border-radius: 24px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.02);
+    box-sizing: border-box;
+    
+    /* Animazione interna alla card desktop */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, opacity 0.8s ease-out 0.2s;
+  }
+
+  .is-visible .form-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .form-info-text {
+    color: #cc2929; /* Rosso tecnico scuro accessibile */
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-weight: 500;
+    margin: 0 0 30px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0edf6;
+  }
+
+  .embed-placeholder {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ==========================================
+     MEDIA QUERIES - RESPONSIVE DI PRECISIONE
+     ========================================== */
+  @media (max-width: 1200px) {
+    .contact-grid {
+      gap: 40px;
+    }
+    .form-card {
+      padding: 32px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .contact-section {
+      padding: 100px 32px;
+    }
+    
+    .contact-grid {
+      grid-template-columns: 1fr; /* Passaggio a singola colonna stabile */
+      gap: 60px;
+    }
+
+    .contact-info-block {
+      position: relative;
+      top: 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-subtitle {
+      max-width: 650px;
+      margin-bottom: 40px;
+    }
+
+    /* Mantiene le icone affiancate in orizzontale su tablet per salvare spazio verticale */
+    .info-items {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      width: 100%;
+    }
+
+    .info-item {
+      text-align: left;
+    }
+
+    .annotation-contact {
+      margin-top: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      padding: 80px 20px;
+    }
+
+    .contact-title {
+      font-size: 2.4rem;
+    }
+
+    .info-items {
+      flex-direction: column; /* Incolonna su smartphone */
+      align-items: flex-start;
+      gap: 24px;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .info-item {
+      width: 100%;
+    }
+
+    .form-card {
+      padding: 24px;
+      border-radius: 20px;
+      /* Disattiva ritardi animazione per fluidità touch */
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .form-info-text {
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .contact-scroll-wrapper {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>

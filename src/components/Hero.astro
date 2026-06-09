@@ -1,0 +1,383 @@
+---
+// Sezione Hero Premium con Word Reveal, Mouse-Tracking Parallasse e Animazioni Interattive
+---
+
+<header class="hero-container" id="heroSection">
+  <div class="hero-bg" id="heroBg">
+    <img src="/images/hero-background.jpg" alt="Esplora in bicicletta" />
+    <div class="overlay"></div>
+  </div>
+
+  <div class="hero-content" id="heroContent">
+    <p class="hero-subtitle">
+      <span class="char-reveal">Esplora il territorio su due ruote</span>
+    </p>
+    
+    <h1 class="hero-title">
+      <span class="hero-word-wrap"><span class="hero-word">Senti</span></span>
+      <span class="hero-word-wrap"><span class="hero-word">la</span></span>
+      <span class="hero-word-wrap"><span class="hero-word italic-title glow-text">libertà</span></span>
+      <br/>
+      <span class="hero-word-wrap"><span class="hero-word">in</span></span>
+      <span class="hero-word-wrap"><span class="hero-word">ogni</span></span>
+      <span class="hero-word-wrap"><span class="hero-word italic-title glow-text">pedalata</span></span>
+    </h1>
+    
+    <div class="hero-actions">
+      <a href="#prenota" class="btn btn-primary">Prenota la tua Bici</a>
+      <a href="#modelli" class="btn btn-secondary">Vedi i Modelli</a>
+    </div>
+  </div>
+
+  <div class="scroll-down-wrapper">
+    <span class="handwritten-scroll">Scroll to see full collection</span>
+    <svg class="scroll-arrow" width="20" height="30" viewBox="0 0 24 40" fill="none">
+      <path d="M12,5 V35 M5,28 L12,35 L19,28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</header>
+
+<script>
+  function initAdvancedHero() {
+    const hero = document.getElementById('heroSection');
+    const heroBg = document.getElementById('heroBg');
+    const heroContent = document.getElementById('heroContent');
+
+    if (!hero) return;
+
+    // Trigger immediato per animazione a cascata (Word Reveal)
+    void hero.offsetWidth;
+    hero.classList.add('is-visible');
+
+    // Effetto Parallasse Interattivo legato al movimento del mouse (Solo Desktop stabile)
+    if (window.innerWidth > 1024 && heroBg && heroContent) {
+      hero.addEventListener('mousemove', (e) => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        
+        const mouseX = (e.clientX / width) - 0.5;
+        const mouseY = (e.clientY / height) - 0.5;
+
+        // Muove lo sfondo e il testo a intensità opposte per creare profondità 3D
+        heroBg.style.transform = `translate3d(${mouseX * -25}px, ${mouseY * -25}px, 0) scale(1.05)`;
+        heroContent.style.transform = `translate3d(${mouseX * 15}px, ${mouseY * 15}px, 0)`;
+      });
+
+      // Ritorno morbido alla posizione iniziale quando il mouse esce dal viewport
+      hero.addEventListener('mouseleave', () => {
+        heroBg.style.transform = `translate3d(0, 0, 0) scale(1)`;
+        heroContent.style.transform = `translate3d(0, 0, 0)`;
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initAdvancedHero);
+  window.addEventListener('load', initAdvancedHero);
+</script>
+
+<style>
+  /* ==========================================
+     CONTENITORE PRINCIPALE
+     ========================================== */
+  .hero-container {
+    position: relative;
+    height: 100vh;
+    height: 100dvh; /* Evita i salti di layout dovuti alle barre dei browser mobile */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: #000000;
+  }
+
+  /* Sfondo abbondante per consentire il movimento del mouse su grandi schermi */
+  .hero-bg {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    z-index: 1;
+    will-change: transform;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+  }
+
+  /* Attivazione animazione Ken Burns lenta di base */
+  .hero-container.is-visible .hero-bg img {
+    animation: advancedKenBurns 30s infinite alternate ease-in-out;
+  }
+
+  @keyframes advancedKenBurns {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.06) rotate(0.5deg); }
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.65) 100%);
+    z-index: 2;
+  }
+
+  /* ==========================================
+     CONTENUTO & WORD REVEAL ANIMATO
+     ========================================== */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    will-change: transform;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Sottotitolo a comparsa fluida */
+  .char-reveal {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 1s ease-out 0.2s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+
+  .hero-container.is-visible .char-reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Struttura maschera per le parole del titolo */
+  .hero-word-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    margin-right: 0.18em;
+  }
+
+  .hero-word {
+    display: inline-block;
+    transform: translateY(115%);
+    opacity: 0;
+    transition: transform 1.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.1s ease-out;
+    will-change: transform, opacity;
+  }
+
+  .hero-container.is-visible .hero-word {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Sequenza temporale millimetrica (Stagger) */
+  .hero-word-wrap:nth-child(1) .hero-word { transition-delay: 0.3s; }
+  .hero-word-wrap:nth-child(2) .hero-word { transition-delay: 0.4s; }
+  .hero-word-wrap:nth-child(3) .hero-word { transition-delay: 0.5s; } /* "libertà" */
+  .hero-word-wrap:nth-child(5) .hero-word { transition-delay: 0.65s; }
+  .hero-word-wrap:nth-child(6) .hero-word { transition-delay: 0.75s; }
+  .hero-word-wrap:nth-child(7) .hero-word { transition-delay: 0.85s; } /* "pedalata" */
+
+  /* ==========================================
+     TYPOGRAPHY & EFFETTO LUMINOSO ELEGANTE
+     ========================================== */
+  .hero-subtitle {
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+  }
+
+  .hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.6rem, 7vw, 7.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0 0 3.5rem 0;
+    letter-spacing: -0.03em;
+  }
+
+  .italic-title {
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .glow-text {
+    color: #ffffff;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0);
+    animation: elegantGlow 4s infinite alternate ease-in-out 2s;
+  }
+
+  @keyframes elegantGlow {
+    0% { text-shadow: 0 0 30px rgba(255, 255, 255, 0); }
+    100% { text-shadow: 0 0 35px rgba(255, 255, 255, 0.25); }
+  }
+
+  /* ==========================================
+     PULSANTI CON REVEAL DEDICATO
+     ========================================== */
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out 1.1s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 1.1s;
+  }
+
+  .hero-container.is-visible .hero-actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .btn-primary {
+    background-color: #ffffff;
+    color: #111111;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-primary:hover {
+    background-color: #e5e5e5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+  .btn-secondary:hover {
+    background-color: #ffffff;
+    color: #111111;
+    transform: translateY(-2px);
+  }
+
+  /* ==========================================
+     SCROLL DOWN
+     ========================================== */
+  .scroll-down-wrapper {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .handwritten-scroll {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+
+  .scroll-arrow {
+    animation: heroArrowBounce 1.8s infinite ease-in-out;
+    will-change: transform;
+  }
+
+  @keyframes heroArrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ==========================================
+     MEDIA QUERIES - RESPONSIVE DI PRECISIONE
+     ========================================== */
+  @media (max-width: 1024px) {
+    .hero-content { 
+      padding: 0 24px; 
+    }
+    /* Reset totale dei margini di tolleranza mouse su tablet e notebook touch */
+    .hero-bg { 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      transform: none !important; 
+    }
+    .hero-content { 
+      transform: none !important; 
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-container { 
+      height: 100vh; 
+      height: 100svh; /* Adattamento dinamico esatto per mobile */
+    }
+    
+    .hero-title { 
+      margin-bottom: 3rem; 
+    }
+    
+    /* Incolonnamento sicuro dei bottoni per evitare tagli sui lati */
+    .hero-actions {
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .btn { 
+      width: 100%; 
+      padding: 15px 24px; 
+      font-size: 0.85rem; 
+    }
+    
+    .scroll-down-wrapper { 
+      bottom: 20px; 
+    }
+    
+    .handwritten-scroll { 
+      font-size: 1.15rem; 
+    }
+  }
+
+  @media (max-width: 380px) {
+    .hero-title { 
+      line-height: 1.15; 
+    }
+    .scroll-down-wrapper { 
+      display: none; /* Nascondiamo l'ingombro per schermi ultra-stretti */
+    }
+  }
+</style>
