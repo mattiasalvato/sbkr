@@ -1,6 +1,10 @@
 ---
 // Showcase.astro - Lookbook con Hotspot, Card fisse, Annotazioni Handwritten e Icone Alpine
 import showcaseBike1 from '../images/ebike1.png';
+import cambioBike from '../images/cambio.jpg';
+import contakmBike from '../images/contakm.jpg';
+import manubrioBike from '../images/manubrio.jpg';
+import telaioBike from '../images/telaio.jpg';
 ---
 
 <div class="showcase-scroll-wrapper" id="showcase">
@@ -15,28 +19,28 @@ import showcaseBike1 from '../images/ebike1.png';
       <div class="ebike-interactive-wrapper">
         <img src={showcaseBike1.src} alt="E-MTB Model" class="hero-img" />
 
-        <div class="hotspot-point" style="top: 65%; left: 48%;z-index: 50;">
+        <div class="hotspot-point" style="top: 30%; left: 48%;z-index: 50;">
           <button class="hotspot-trigger" aria-label="Info Motore">+</button>
           <div class="hotspot-popup pop-left">
             <div class="popup-thumb">
-              <img src="https://placehold.co/300x200/1e293b/fff?text=85Nm+Motor" alt="Motor Tech" />
+              <img src={telaioBike.src} alt="Telaio Tech" />
             </div>
             <div class="popup-content">
-              <h3>85Nm Torque</h3>
-              <p>Spinta immediata e fluidità di pedalata in pendenza.</p>
+              <h3>Telaio</h3>
+              <p>Costruito con materiali avanzati per massima resistenza e leggerezza.</p>
             </div>
           </div>
         </div>
 
-        <div class="hotspot-point" style="top: 45%; left: 35%;">
+        <div class="hotspot-point" style="top: 15%; left: 65%;z-index: 55;">
           <button class="hotspot-trigger" aria-label="Info Batteria">+</button>
           <div class="hotspot-popup pop-top">
             <div class="popup-thumb">
-              <img src="https://placehold.co/300x200/1e293b/fff?text=630Wh+Battery" alt="Battery Tech" />
+              <img src={contakmBike.src} alt="Conta KM" />
             </div>
             <div class="popup-content">
-              <h3>Lithium Cells</h3>
-              <p>Celle ad alta densità integrate per la massima autonomia.</p>
+              <h3>Conta KM</h3>
+              <p>Monitoraggio preciso della distanza percorsa con display digitale.</p>
             </div>
           </div>
         </div>
@@ -45,24 +49,24 @@ import showcaseBike1 from '../images/ebike1.png';
           <button class="hotspot-trigger" aria-label="Info Freni">+</button>
           <div class="hotspot-popup pop-right">
             <div class="popup-thumb">
-              <img src="https://placehold.co/300x200/1e293b/fff?text=Hydraulic+Brakes" alt="Brakes Tech" />
+              <img src={cambioBike.src} alt="Cambio Tech" />
             </div>
             <div class="popup-content">
-              <h3>Magura MT5</h3>
-              <p>Impianto idraulico a risonanza ridotta per discese ripide.</p>
+              <h3>Cambio</h3>
+              <p>Cambio 12 velocità con sistema di cambio automatico.</p>
             </div>
           </div>
         </div>
 
-        <div class="hotspot-point" style="top: 35%; left: 75%;z-index: 55;">
+        <div class="hotspot-point" style="top: 30%; left: 70%;z-index: 55;">
           <button class="hotspot-trigger" aria-label="Info Sospensioni">+</button>
           <div class="hotspot-popup pop-left">
             <div class="popup-thumb">
-              <img src="https://placehold.co/300x200/1e293b/fff?text=140mm+Suspension" alt="Suspension Tech" />
+              <img src={manubrioBike.src} alt="Manubrio Tech" />
             </div>
             <div class="popup-content">
-              <h3>Air Shocks</h3>
-              <p>Assorbimento progressivo degli urti su radici e rocce.</p>
+              <h3>Manubrio</h3>
+              <p>Progettato per comfort e controllo ottimale in ogni condizione di guida.</p>
             </div>
           </div>
         </div>
