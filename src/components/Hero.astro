@@ -1,8 +1,9 @@
 ---
 // Hero.astro
-// Importiamo direttamente il file come se fosse un modulo.
-// Usiamo i due punti per risalire fino alla cartella public.
-import heroBgImage from '../../public/images/hero-background.jpg';
+
+// Usiamo lo slash iniziale per partire direttamente dalla radice del progetto.
+// CONTROLLA SE L'ESTENSIONE REALE È .jpg O .JPG (qui ho messo .jpg)
+import heroBgImage from '/public/images/hero-background.jpg'; 
 ---
 
 <header class="hero-container" id="heroSection">
