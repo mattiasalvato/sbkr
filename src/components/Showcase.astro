@@ -1,5 +1,6 @@
 ---
 // Showcase.astro - Lookbook con Hotspot, Card fisse, Annotazioni Handwritten e Icone Alpine
+import showcaseBike1 from '../images/ebike1.png';
 ---
 
 <div class="showcase-scroll-wrapper" id="showcase">
@@ -12,7 +13,7 @@
     <div class="visual-container">
       
       <div class="ebike-interactive-wrapper">
-        <img src="/images/ebike1.png" alt="E-MTB Model" class="hero-img" />
+        <img src={showcaseBike1.src} alt="E-MTB Model" class="hero-img" />
 
         <div class="hotspot-point" style="top: 65%; left: 48%;z-index: 50;">
           <button class="hotspot-trigger" aria-label="Info Motore">+</button>

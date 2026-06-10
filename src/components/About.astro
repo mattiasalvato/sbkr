@@ -1,5 +1,8 @@
 ---
-// Seconda Sezione: Introduzione / Filosofia del Noleggio con Sentiero Cartografico Decathlon ed Effetti Interattivi Avanzati
+// About.astro
+import aboutBike1 from '../images/about-bike-1.webp';
+import aboutBike2 from '../images/about-bike-2.webp';
+import aboutBike3 from '../images/about-bike-3.webp';
 ---
 
 <div class="about-scroll-trigger" id="about">
@@ -37,7 +40,7 @@
 
       <div class="image-block-one-bleed parallax-element reveal-image" data-speed="-0.06">
         <div class="image-wrapper-bleed ken-burns tilt-target">
-          <img src="/images/about-bike-1.webp" alt="Dettaglio e-bike pronta all'avventura" class="interactive-img" />
+          <img src={aboutBike1.src} alt="Dettaglio e-bike pronta all'avventura" class="interactive-img" />
         </div>
       </div>
     </div>
@@ -45,7 +48,7 @@
     <div class="container lower-grid">
       <div class="image-block-two parallax-element reveal-image" data-speed="0.05">
         <div class="image-wrapper ken-burns tilt-target">
-          <img src="/images/about-bike-2.webp" alt="Ciclista sui sentieri" class="interactive-img" />
+          <img src={aboutBike2.src} alt="Ciclista sui sentieri" class="interactive-img" />
         </div>
       </div>
       <div class="third-text parallax-element reveal-text" data-speed="-0.02">
@@ -63,7 +66,7 @@
       </div>
       <div class="image-block-three parallax-element reveal-image" data-speed="-0.05">
         <div class="image-wrapper ken-burns tilt-target">
-          <img src="/images/about-bike-3.webp" alt="Trekking sui sentieri" class="interactive-img" />
+          <img src={aboutBike3.src} alt="Trekking sui sentieri" class="interactive-img" />
         </div>
       </div>
     </div>

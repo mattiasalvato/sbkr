@@ -1,10 +1,11 @@
 ---
 // Sezione Impatto: offer.astro con Parallasse, Word Reveal e Responsive Blindato
+import offerBackground from '../images/offer-background.jpg';
 ---
 
 <header class="offer-container" id="offerSection">
   <div class="offer-bg" id="offerBg">
-    <img src="/images/offer-background.jpg" alt="Esplora in bicicletta" />
+    <img src={offerBackground.src} alt="Esplora in bicicletta" />
     <div class="overlay"></div>
   </div>
 
