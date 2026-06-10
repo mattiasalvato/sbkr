@@ -1,5 +1,5 @@
 ---
-// Quarta Sezione: Cosa è incluso nel Noleggio (Stile Tech Grid Avanzato)
+// Quarta Sezione: Cosa è incluso nel Noleggio (Stile Tech Grid Avanzato con Overlapping Effect)
 ---
 
 <section class="incluso-section" id="offerta">
@@ -32,7 +32,7 @@
         </svg>
       </div>
       <h3 class="item-title">Assicurazione RC</h3>
-      <p class="item-description">Copertura contro danni a terzi inclusa per tutta la durata del noleggio.</p>
+      <p class="item-description">Copertura contra danni a terzi inclusa per tutta la durata del noleggio.</p>
     </div>
 
     <div class="grid-item fade-in-item">
@@ -105,23 +105,36 @@
   }
 
   document.addEventListener('DOMContentLoaded', initInclusoAnimation);
-  window.addEventListener('load', initInclusoAnimation);
+  document.addEventListener('astro:page-load', initInclusoAnimation);
 </script>
 
 <style>
   /* ==========================================
-     LAYOUT SFONDO SCURO E STRUTTURA
+     STILE OVERLAP SCROLLER (REFOK STYLE MATT)
      ========================================== */
   .incluso-section {
+    /* 👇 ABILITAZIONE DELLO STICKY STACKING: Vince su Showcase (z-index: 1) e si aggancia a top 0 */
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 100vh;
+    z-index: 2; 
+    overflow-y: auto; /* Permette lo scroll nativo se i testi/griglia sporgono sui monitor piccoli */
+
     background-color: #1d1d1d; 
     color: #ffffff;
-    padding: 140px 60px;
-    font-family: 'Inter', sans-serif;
+    padding: 80px 60px; /* Ridotto per centrare perfettamente i blocchi in 100vh */
+    font-family: 'Plus Jakarta Sans', sans-serif;
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    justify-content: center;
+    gap: 40px; /* Compatto ed elegante */
+    box-shadow: 0 -40px 80px rgba(0, 0, 0, 0.25);
   }
 
+  /* ==========================================
+     LAYOUT INTESTAZIONE
+     ========================================== */
   .incluso-header {
     max-width: 800px;
   }
@@ -132,15 +145,15 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 600;
-    margin: 0 0 15px 0;
+    margin: 0 0 12px 0;
   }
 
   .section-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3.8rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 3.5rem;
     font-weight: 700;
     line-height: 1.1;
-    margin: 0 0 25px 0;
+    margin: 0 0 15px 0;
     letter-spacing: -0.03em;
   }
 
@@ -151,8 +164,8 @@
   }
 
   .section-subtitle {
-    font-size: 1.15rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
   }
@@ -169,15 +182,14 @@
 
   .grid-item {
     position: relative;
-    padding: 60px 45px;
+    padding: 45px 35px; /* Ottimizzato per schermi laptop standard */
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     background-color: transparent;
     
-    /* Configurazione d'ingresso controllata */
     opacity: 0;
     transform: translateY(30px);
     will-change: transform, opacity;
@@ -212,7 +224,6 @@
     display: block;
   }
 
-  /* Animazioni dedicate per singola icona all'hover sulla card */
   .grid-item:hover .ico-helmet { transform: translateY(-4px) rotate(-5deg); }
   .grid-item:hover .ico-shield { transform: scale(1.15); }
   .grid-item:hover .ico-wrench { transform: rotate(45deg); }
@@ -221,15 +232,15 @@
   .grid-item:hover .ico-phone  { transform: rotate(-15deg) scale(1.1); }
 
   .item-title {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 600;
     margin: 0;
     letter-spacing: -0.01em;
   }
 
   .item-description {
-    font-size: 0.95rem;
-    line-height: 1.55;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: rgba(255, 255, 255, 0.7);
     margin: 0;
   }
@@ -238,51 +249,38 @@
      RESPONSIVE DI PRECISIONE 
      ========================================== */
   @media (max-width: 1120px) {
-    .grid-item {
-      padding: 50px 35px;
-    }
+    .grid-item { padding: 35px 25px; }
   }
 
   @media (max-width: 1024px) {
     .incluso-section {
-      padding: 100px 40px;
-      gap: 60px;
-    }
-
-    .section-title {
-      font-size: 2.8rem;
-    }
-
-    .tech-grid {
-      grid-template-columns: repeat(2, 1fr); /* 2 Colonne su Tablet */
-    }
+    position: sticky !important; /* 👈 Riattiviamo lo sticky su mobile */
+    top: 0;
+    height: 100dvh !important;     /* 👈 Altezza dinamica stabile */
+    min-height: 100dvh !important;
+    padding: 40px 24px;          /* Padding compatto anti-overflow */
+    gap: 30px;
+  }
+    .section-title { font-size: 2.8rem; }
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
     .incluso-section {
-      padding: 80px 24px;
-      gap: 45px;
-    }
-
-    .section-title {
-      font-size: 2.2rem;
-    }
-
-    .tech-grid {
-      grid-template-columns: 1fr; /* Colonna singola su Mobile */
-    }
-
+    padding: 40px 20px;
+    gap: 20px;
+  }
+    .section-title { font-size: 2.2rem; }
+   .tech-grid {
+    /* Consiglio extra: se hai molto testo, usa l'auto-scroll interno alla griglia */
+    max-height: 60dvh;
+    overflow-y: auto; 
+  }
     .grid-item {
-      padding: 40px 20px;
-      gap: 16px;
-      
-      /* Mantiene l'animazione attiva e burrosa anche su smartphone, senza bloccarla */
-      opacity: 0;
+      padding: 30px 15px;
+      gap: 12px;
       transform: translateY(20px);
     }
-    
-    .item-title {
-      font-size: 1.25rem;
-    }
+    .item-title { font-size: 1.15rem; }
   }
 </style>

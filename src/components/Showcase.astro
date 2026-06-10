@@ -7,150 +7,151 @@ import manubrioBike from '../images/manubrio.jpg';
 import telaioBike from '../images/telaio.jpg';
 ---
 
-<div class="showcase-scroll-wrapper" id="showcase">
-  <section class="lookbook-section">
-    <div class="header-content">
-      <h2 class="main-title reveal-word italic-title shimmer-effect">X-plör Venture</h2>
-      <p class="subtitle">Il nostro modello di punta combina eleganza e prestazioni estreme. Con un’autonomia fino a 100km e un motore ultra-silenzioso, la Venture Salvia è la compagna perfetta per le tue esplorazioni quotidiane.</p>
-    </div>
-
-    <div class="visual-container">
-      
-      <div class="ebike-interactive-wrapper">
-        <img src={showcaseBike1.src} alt="E-MTB Model" class="hero-img" />
-
-        <div class="hotspot-point" style="top: 30%; left: 48%;z-index: 50;">
-          <button class="hotspot-trigger" aria-label="Info Motore">+</button>
-          <div class="hotspot-popup pop-left">
-            <div class="popup-thumb">
-              <img src={telaioBike.src} alt="Telaio Tech" />
-            </div>
-            <div class="popup-content">
-              <h3>Telaio</h3>
-              <p>Costruito con materiali avanzati per massima resistenza e leggerezza.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hotspot-point" style="top: 15%; left: 65%;z-index: 55;">
-          <button class="hotspot-trigger" aria-label="Info Batteria">+</button>
-          <div class="hotspot-popup pop-top">
-            <div class="popup-thumb">
-              <img src={contakmBike.src} alt="Conta KM" />
-            </div>
-            <div class="popup-content">
-              <h3>Conta KM</h3>
-              <p>Monitoraggio preciso della distanza percorsa con display digitale.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hotspot-point" style="top: 70%; left: 15%;">
-          <button class="hotspot-trigger" aria-label="Info Freni">+</button>
-          <div class="hotspot-popup pop-right">
-            <div class="popup-thumb">
-              <img src={cambioBike.src} alt="Cambio Tech" />
-            </div>
-            <div class="popup-content">
-              <h3>Cambio</h3>
-              <p>Cambio 12 velocità con sistema di cambio automatico.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hotspot-point" style="top: 30%; left: 70%;z-index: 55;">
-          <button class="hotspot-trigger" aria-label="Info Sospensioni">+</button>
-          <div class="hotspot-popup pop-left">
-            <div class="popup-thumb">
-              <img src={manubrioBike.src} alt="Manubrio Tech" />
-            </div>
-            <div class="popup-content">
-              <h3>Manubrio</h3>
-              <p>Progettato per comfort e controllo ottimale in ogni condizione di guida.</p>
-            </div>
-          </div>
-        </div>
+<div class="showcase-sticky-container" id="showcase">
+  <div class="showcase-zoom-wrapper">
+    <section class="lookbook-section">
+      <div class="header-content">
+        <h2 class="main-title reveal-word italic-title shimmer-effect">X-plör Venture</h2>
+        <p class="subtitle">Il nostro modello di punta combina eleganza e prestazioni estreme. Con un’autonomia fino a 100km e un motore ultra-silenzioso, la Venture Salvia è la compagna perfetta per le tue esplorazioni quotidiane.</p>
       </div>
 
-      <div class="cards-responsive-container">
+      <div class="visual-container">
         
-        <div class="feature-card card-left-top">
-          <div class="card-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M4 22L12 10L20 22H4Z" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M10 22L14 15L18 22" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 4V2M12 2L9 5M12 2L15 5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="ebike-interactive-wrapper">
+          <img src={showcaseBike1.src} alt="E-MTB Model" class="hero-img" />
+
+          <div class="hotspot-point" style="top: 30%; left: 48%;">
+            <button class="hotspot-trigger" aria-label="Info Motore">+</button>
+            <div class="hotspot-popup pop-left">
+              <div class="popup-thumb">
+                <img src={telaioBike.src} alt="Telaio Tech" />
+              </div>
+              <div class="popup-content">
+                <h3>Telaio</h3>
+                <p>Costruito con materials avanzati per massima resistenza e leggerezza.</p>
+              </div>
+            </div>
           </div>
-          <div class="card-text">
-            <h3>Power Performance</h3>
-            <p>Motore centrale da 85Nm per scalate senza compromessi su ogni terreno.</p>
+
+          <div class="hotspot-point" style="top: 15%; left: 65%;">
+            <button class="hotspot-trigger" aria-label="Info Batteria">+</button>
+            <div class="hotspot-popup pop-top">
+              <div class="popup-thumb">
+                <img src={contakmBike.src} alt="Conta KM" />
+              </div>
+              <div class="popup-content">
+                <h3>Conta KM</h3>
+                <p>Monitoraggio preciso della distanza percorsa con display digital.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hotspot-point" style="top: 70%; left: 15%;">
+            <button class="hotspot-trigger" aria-label="Info Freni">+</button>
+            <div class="hotspot-popup pop-right">
+              <div class="popup-thumb">
+                <img src={cambioBike.src} alt="Cambio Tech" />
+              </div>
+              <div class="popup-content">
+                <h3>Cambio</h3>
+                <p>Cambio 12 velocità con sistema di cambio automatico.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hotspot-point" style="top: 30%; left: 70%;">
+            <button class="hotspot-trigger" aria-label="Info Sospensioni">+</button>
+            <div class="hotspot-popup pop-left">
+              <div class="popup-thumb">
+                <img src={manubrioBike.src} alt="Manubrio Tech" />
+              </div>
+              <div class="popup-content">
+                <h3>Manubrio</h3>
+                <p>Progettato per comfort e controllo ottimale in ogni condizione di guida.</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="feature-card card-right-top">
-          <div class="card-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="cards-responsive-container">
+          
+          <div class="feature-card card-left-top">
+            <div class="card-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 22L12 10L20 22H4Z" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 22L14 15L18 22" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 4V2M12 2L9 5M12 2L15 5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-text">
+              <h3>Power Performance</h3>
+              <p>Motore centrale da 85Nm per scalate senza compromessi su ogni terreno.</p>
+            </div>
           </div>
-          <div class="card-text">
-            <h3>Endurance Battery</h3>
-            <p>630Wh di pura energia per avventure che durano tutto il giorno.</p>
+
+          <div class="feature-card card-right-top">
+            <div class="card-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-text">
+              <h3>Endurance Battery</h3>
+              <p>630Wh di pura energia per avventure che durano tutto il giorno.</p>
+            </div>
           </div>
+
+          <div class="feature-card card-left-bottom">
+            <div class="card-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-text">
+              <h3>Hydraulic Control</h3>
+              <p>Freni a disco idraulici a 4 pistoncini per frenate millimetriche in discesa.</p>
+            </div>
+          </div>
+
+          <div class="feature-card card-right-mid">
+            <div class="card-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 20V4M12 4L8 8M12 4L16 8M6 20H18" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-text">
+              <h3>Smart Suspension</h3>
+              <p>Forcella anteriore ad aria con 140mm di escursione e blocco remoto.</p>
+            </div>
+          </div>
+
         </div>
 
-        <div class="feature-card card-left-bottom">
-          <div class="card-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="card-text">
-            <h3>Hydraulic Control</h3>
-            <p>Freni a disco idraulici a 4 pistoncini per frenate millimetriche in discesa.</p>
-          </div>
+        <div class="notebook-annotation note-top-left">
+          <span class="handwritten">Testata sui tornanti delle Lessini</span>
+          <svg class="handwritten-arrow" width="60" height="40" viewBox="0 0 80 40">
+            <path d="M10,10 Q40,35 70,15 M60,10 L70,15 L65,25" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </div>
 
-        <div class="feature-card card-right-mid">
-          <div class="card-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M12 20V4M12 4L8 8M12 4L16 8M6 20H18" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="card-text">
-            <h3>Smart Suspension</h3>
-            <p>Forcella anteriore ad aria con 140mm di escursione e blocco remoto.</p>
-          </div>
+        <div class="notebook-annotation note-bottom-right">
+          <svg class="handwritten-arrow arrow-invert" width="50" height="40" viewBox="0 0 80 40">
+            <path d="M70,10 Q40,35 10,15 M20,10 L10,15 L15,25" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span class="handwritten">Grip estremo da fango e roccia</span>
         </div>
 
       </div>
 
-      <div class="notebook-annotation note-top-left">
-        <span class="handwritten">Testata sui tornanti delle Lessini</span>
-        <svg class="handwritten-arrow" width="60" height="40" viewBox="0 0 80 40">
-          <path d="M10,10 Q40,35 70,15 M60,10 L70,15 L65,25" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
+      <div class="action-cta">
+        <a href="#contatti" class="btn-main">Prenota Ora!</a>
       </div>
-
-      <div class="notebook-annotation note-bottom-right">
-        <svg class="handwritten-arrow arrow-invert" width="50" height="40" viewBox="0 0 80 40">
-          <path d="M70,10 Q40,35 10,15 M20,10 L10,15 L15,25" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <span class="handwritten">Grip estremo da fango e roccia</span>
-      </div>
-
-    </div>
-
-    <div class="action-cta">
-      <a href="#contatti" class="btn-main">BOOK A TEST RIDE</a>
-    </div>
-   
-  </section>
+    </section>
+  </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initShowcaseObserver() {
     const showcaseSection = document.getElementById('showcase');
 
     if (showcaseSection) {
@@ -167,15 +168,32 @@ import telaioBike from '../images/telaio.jpg';
       });
       observer.observe(showcaseSection);
     }
-  });
+  }
+
+  document.addEventListener('DOMContentLoaded', initShowcaseObserver);
+  document.addEventListener('astro:page-load', initShowcaseObserver);
 </script>
 
 <style>
   /* ==========================================
-     CONTENITORE REGIDO ZOOM IN INGRESSO
+     CONTENITORE ESTERNO: GESTISCE LO STICKY PURO
      ========================================== */
-  .showcase-scroll-wrapper {
+  .showcase-sticky-container {
     width: 100%;
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    z-index: 1;
+    overflow: hidden;
+    margin-bottom: 70px;
+  }
+
+  /* ==========================================
+     CONTENITORE INTERNO: ZOOM IN INGRESSO PROTETTO
+     ========================================== */
+  .showcase-zoom-wrapper {
+    width: 100%;
+    height: 100%;
     background-color: #D8D5CD; 
     opacity: 0;
     transform: scale(0.85); 
@@ -183,33 +201,33 @@ import telaioBike from '../images/telaio.jpg';
     will-change: transform, opacity;
   }
 
-  .showcase-scroll-wrapper.is-visible {
+  .showcase-sticky-container.is-visible .showcase-zoom-wrapper {
     opacity: 1;
     transform: scale(1); 
   }
 
   .lookbook-section {
-    min-height: 100vh;
-    padding: 80px 40px;
+    height: 100%;
+    padding: 60px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     position: relative;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     color: #1a1a1a;
-    overflow: hidden;
   }
 
   .header-content {
-   text-align: center; /* Centra il titolo e gli elementi inline/block */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Forza la centratura dei blocchi se usi flex */
-  width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .main-title {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 600;
     margin: 0;
@@ -219,9 +237,9 @@ import telaioBike from '../images/telaio.jpg';
   .subtitle {
     font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     color: #444;
-    text-align: center; /* Centra le righe di testo all'interno del paragrafo */
-  max-width: 600px;   /* Evita che la riga diventi troppo lunga e illeggibile */
-  margin: 12px auto 0 auto; /* L' 'auto' sui lati centra il blocco del paragrafo */
+    text-align: center;
+    max-width: 600px;
+    margin: 12px auto 0 auto;
   }
 
   .visual-container {
@@ -257,7 +275,12 @@ import telaioBike from '../images/telaio.jpg';
      ========================================== */
   .hotspot-point {
     position: absolute;
-    z-index: 30;
+    z-index: 10; /* Livello desktop normale */
+  }
+
+  /* FIX CRITICO DESKTOP: Quando passi sull'hotspot, il padre sale di livello */
+  .hotspot-point:hover {
+    z-index: 100;
   }
 
   .hotspot-trigger {
@@ -301,7 +324,6 @@ import telaioBike from '../images/telaio.jpg';
     transform: scale(0.9) translateY(10px);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
-    z-index: 40;
   }
 
   .hotspot-point:hover .hotspot-popup {
@@ -311,7 +333,7 @@ import telaioBike from '../images/telaio.jpg';
     pointer-events: auto;
   }
 
-  .popup-thumb { width: 100%; height: 120px; overflow: hidden;}
+  .popup-thumb { width: 100%; height: 120px; overflow: hidden; }
   .popup-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .popup-content { padding: 12px;}
   .popup-content h3 { font-size: 1rem; margin: 0 0 4px 0; font-weight: 700; color: #111; }
@@ -356,7 +378,6 @@ import telaioBike from '../images/telaio.jpg';
     box-shadow: 0 25px 50px rgba(0,0,0,0.08);
   }
 
-  /* Box Favicon Tecnica Autonoma */
   .card-icon-box {
     width: 48px;
     height: 48px;
@@ -383,7 +404,6 @@ import telaioBike from '../images/telaio.jpg';
   .card-text h3 { font-size: 1.1rem; margin: 0; font-weight: 600; color: #1a1a1a; }
   .card-text p { font-size: 0.85rem; color: #555; margin: 6px 0 0; line-height: 1.4; }
 
-  /* Distribuzione geometrica fissa delle card attorno alla bici */
   .card-left-top     { left: 0;   top: 8%;   animation-delay: 0s; }
   .card-right-top    { right: 0;  top: 8%;   animation-delay: 1.5s; }
   .card-left-bottom  { left: 40px;  bottom: 8%;  animation-delay: 3s; }
@@ -397,7 +417,7 @@ import telaioBike from '../images/telaio.jpg';
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 5;
+    z-index: 1;
     pointer-events: none;
     opacity: 0.75;
   }
@@ -423,7 +443,7 @@ import telaioBike from '../images/telaio.jpg';
 
   .note-bottom-right {
     right: 25%;
-    bottom: 12%;
+    bottom: 0%;
     transform: rotate(3deg);
   }
 
@@ -452,60 +472,130 @@ import telaioBike from '../images/telaio.jpg';
     50% { transform: translateY(-10px); }
   }
 
-  /* ==========================================
-     MEDIA QUERIES - RESPONSIVE DI PRECISIONE
-     ========================================== */
   @media (max-width: 1340px) {
     .feature-card { width: 285px; padding: 16px; gap: 14px; }
     .ebike-interactive-wrapper { max-width: 500px; }
     .card-left-bottom { left: 10px; }
     .card-right-mid { right: 10px; }
-    .notebook-annotation { display: none !important; } /* Rimosse sui laptop stretti */
+    .notebook-annotation { display: none !important; }
   }
 
+  /* ==========================================
+     RESPONSIVE DI PRECISIONE MOBILE (SOTTO 1024PX)
+     ========================================== */
   @media (max-width: 1024px) {
-    .showcase-scroll-wrapper { transform: none !important; opacity: 1 !important; }
-    .lookbook-section { padding: 60px 24px; min-height: auto; }
-    .visual-container { height: auto; flex-direction: column; gap: 50px; margin: 30px 0; }
+    .showcase-sticky-container {
+      position: sticky !important;
+      top: 0;
+      height: 100dvh !important;
+      min-height: 100dvh !important;
+    }
 
-    .hotspot-point, .notebook-annotation { display: none !important; }
-    .ebike-interactive-wrapper { max-width: 75%; order: 1; }
-    .hero-img { max-height: 360px; }
+    .lookbook-section {
+      padding: 40px 20px;
+      justify-content: center !important;
+      gap: 30px;
+    }
+
+    .main-title {
+      font-size: 2.2rem !important;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      font-size: 0.95rem !important;
+      max-width: 100%;
+      margin-top: 10px;
+    }
+
+    .visual-container {
+      height: auto !important;
+      flex-direction: column;
+      margin: 20px 0;
+    }
+
+    .ebike-interactive-wrapper {
+      max-width: 90% !important; 
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+    }
+
+    .hero-img {
+      max-height: 280px !important;
+      object-fit: contain;
+    }
 
     .cards-responsive-container {
-      position: relative;
-      width: 100%;
-      height: auto;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      order: 2;
-      pointer-events: auto;
+      display: none !important;
+    }
+    
+    .hotspot-point {
+      display: block !important; 
+      /* 👇 ELEMENTARE: Di base il punto sta sotto, ma se ci va il mouse sopra sale a mille */
+      z-index: 10 !important; 
     }
 
-    .feature-card {
-      position: relative;
-      width: 100% !important;
-      left: auto !important;
-      right: auto !important;
+    /* 👇 QUESTO RISOLVE IL TUO BUG DEL VIDEO: 
+       Quando l'utente attiva questo specifico hotspot, il suo intero guscio 
+       diventa il re incontrastato dello schermo, oscurando gli altri pallini */
+    .hotspot-point:hover {
+      z-index: 99999 !important;
+    }
+
+    /* THE BOTTOM-SHEET POPUP CONTAINER */
+    .hotspot-popup {
       top: auto !important;
-      bottom: auto !important;
-      animation: none !important;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+      left: 0% !important;  /* Centratura millimetrica stabile (5% sx + 5% dx) */
+      right: 5% !important; 
+      bottom: 20px !important; 
       
-      opacity: 0;
-      transform: translateY(20px) !important;
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 80vw !important; 
+      max-width: 400px;
+      height: auto !important;
+      position: fixed !important; 
+      
+      border-radius: 20px !important;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      
+      transform-origin: center bottom !important;
+      transform: translateY(10px) scale(0.98) !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      
+      /* Forza l'elemento interno a passare sopra a tutto il resto della pagina */
+      z-index: 99999 !important; 
     }
 
-    .showcase-scroll-wrapper.is-visible .feature-card { opacity: 1; transform: translateY(0) !important; }
-    .showcase-scroll-wrapper.is-visible .feature-card:nth-child(1) { transition-delay: 0.1s; }
-    .showcase-scroll-wrapper.is-visible .feature-card:nth-child(2) { transition-delay: 0.25s; }
-    .showcase-scroll-wrapper.is-visible .feature-card:nth-child(3) { transition-delay: 0.4s; }
-    .showcase-scroll-wrapper.is-visible .feature-card:nth-child(4) { transition-delay: 0.55s; }
+    .hotspot-point:hover .hotspot-popup {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(0) scale(1) !important;
+    }
 
-    .action-cta { margin-top: 20px; width: 100%; display: flex; justify-content: center; }
-    .btn-main { width: 100%; max-width: 340px; text-align: center; }
+    .popup-thumb { 
+      height: 120px !important; 
+    }
+    
+    .popup-content { 
+      padding: 15px 20px !important; 
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .popup-content h3 { font-size: 1.15rem !important; }
+    .popup-content p { font-size: 0.9rem !important; line-height: 1.5; color: #555; }
+
+    .action-cta { 
+      margin-top: 20px; 
+      margin-bottom: 20px;
+    }
+    .btn-main {
+      width: 100%;
+      max-width: 300px;
+      font-size: 0.85rem;
+    }
   }
 
   @media (max-width: 768px) {

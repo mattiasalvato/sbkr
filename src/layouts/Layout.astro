@@ -1,9 +1,11 @@
 ---
 // src/layouts/Layout.astro
+
 interface Props {
 	title: string;
 }
 const { title } = Astro.props;
+
 ---
 
 <!doctype html>
@@ -15,13 +17,6 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		
-		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Caveat:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<slot />
@@ -29,44 +24,34 @@ const { title } = Astro.props;
 </html>
 
 <style is:global>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
 	* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+/* Trova html, body nel tuo CSS globale e forzali così: */
+html,
+body {
+  margin: 0;
+  padding: 0;
   width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  background-color: #000000; /* 👈 Sostituisci con il colore della sezione se vuoi che lo sfondo si fonda perfettamente */
+  min-height: 100vh;
+  
+  /* SBLOCCO CRITICO: Rimuoviamo hidden e auto, torniamo allo scroll nativo */
+  overflow-x: clip; /* Impedisce lo scroll a destra senza rompere lo sticky */
+  overflow-y: visible; /* Lascia lo scroll verticale totalmente libero */
 }
 
-
- .reveal-wrapper {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: top;
-    margin-right: 0.15em; 
-  }
-
-  .reveal-word {
-    display: inline-block;
-    transform: translateY(110%); 
-    opacity: 0;
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
-    will-change: transform, opacity;
-  }
-
-  .offer-container.is-visible .reveal-word {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .reveal-wrapper:nth-child(1) .reveal-word { transition-delay: 0.1s; }
-  .reveal-wrapper:nth-child(2) .reveal-word { transition-delay: 0.2s; }
-  .reveal-wrapper:nth-child(3) .reveal-word { transition-delay: 0.3s; } 
-  .reveal-wrapper:nth-child(5) .reveal-word { transition-delay: 0.45s; }
-  .reveal-wrapper:nth-child(6) .reveal-word { transition-delay: 0.55s; }
-  .reveal-wrapper:nth-child(7) .reveal-word { transition-delay: 0.65s; } 
+/* Assicurati che anche il contenitore main non crei trappole */
+main, 
+.page-stack-container {
+  width: 100%;
+  position: relative;
+  overflow: visible; /* Massima libertà di movimento per i figli sticky */
+}
 </style>

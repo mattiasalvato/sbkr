@@ -6,6 +6,7 @@ import Showcase from '../components/Showcase.astro';
 import Incluso from '../components/Incluso.astro';
 import Contatti from '../components/Contatti.astro';
 import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
 <html lang="en">
@@ -18,27 +19,39 @@ import Header from '../components/Header.astro';
 		<title>Astro</title>
 	</head>
 	<body>
+		<Layout title="Sambo Bike Rent" />
 		<Header />
 		<Hero />
 		<About />
 		<Offer />
-		<Showcase />
-		<Incluso />
+		<main class="page-stack-container">
+			<Showcase />
+			<Incluso />
+		</main>
 		<Contatti />
 	</body>
 </html>
 
 <style>
-	* {
+	
+/* Trova html, body nel tuo CSS globale e forzali così: */
+html,
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  
+  /* SBLOCCO CRITICO: Rimuoviamo hidden e auto, torniamo allo scroll nativo */
+  overflow-x: clip; /* Impedisce lo scroll a destra senza rompere lo sticky */
+  overflow-y: visible; /* Lascia lo scroll verticale totalmente libero */
 }
 
-html, body {
+/* Assicurati che anche il contenitore main non crei trappole */
+main, 
+.page-stack-container {
   width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  background-color: #ffffff; /* 👈 Sostituisci con il colore della sezione se vuoi che lo sfondo si fonda perfettamente */
+  position: relative;
+  overflow: visible; /* Massima libertà di movimento per i figli sticky */
 }
 </style>
