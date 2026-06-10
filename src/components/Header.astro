@@ -1,5 +1,7 @@
 ---
 // Header.astro - Fix definitivo per il glitch del logo gigante allo scroll
+import logoWhite from '../images/Sambo Bike Rent Logo Orizzontale White PNG.png';
+import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png';
 ---
 
 <nav class="main-header" id="globalHeader">
@@ -7,8 +9,8 @@
     
     <a href="/" class="brand-logo" aria-label="Sambo Bike Rent Home">
       <div class="logo-wrapper">
-        <img src="/images/Sambo Bike Rent Logo Orizzontale White PNG.png" alt="Sambo Bike Rent" class="logo-img logo-white" />
-        <img src="/images/Sambo Bike Rent Logo Orizzontale Black PNG.png" alt="Sambo Bike Rent" class="logo-img logo-black" />
+        <img src={logoWhite.src} alt="Sambo Bike Rent" class="logo-img logo-white" />
+        <img src={logoBlack.src} alt="Sambo Bike Rent" class="logo-img logo-black" />
       </div>
     </a>
 
