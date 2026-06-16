@@ -9,7 +9,7 @@ const { isTransparent = true } = Astro.props;
 <nav class={`main-header ${!isTransparent ? 'header-solid-page' : ''}`} id="globalHeader">
   <div class="header-container">
     
-    <a href="https://www.sambobikerent.it" class="brand-logo" aria-label="Sambo Bike Rent Home">
+    <a href="/" class="brand-logo" aria-label="Sambo Bike Rent Home">
       <div class="logo-wrapper">
         <img src={logoWhite.src} alt="Sambo Bike Rent" class="logo-img logo-white" />
         <img src={logoBlack.src} alt="Sambo Bike Rent" class="logo-img logo-black" />
@@ -17,10 +17,10 @@ const { isTransparent = true } = Astro.props;
     </a>
 
     <ul class="nav-menu" id="navMenu">
-      <li class="nav-item"><a href="#about" class="nav-link">Chi Siamo</a></li>
-      <li class="nav-item"><a href="#showcase" class="nav-link">La Bici</a></li>
-      <li class="nav-item"><a href="#offerta" class="nav-link">Cosa Ricevi</a></li>
-      <li class="nav-item"><a href="#contatti" class="nav-link">Contatti</a></li>
+      <li class="nav-item"><a href="/#about" class="nav-link">Chi Siamo</a></li>
+      <li class="nav-item"><a href="/#showcase" class="nav-link">La Bici</a></li>
+      <li class="nav-item"><a href="/#offerta" class="nav-link">Cosa Ricevi</a></li>
+      <li class="nav-item"><a href="/#contatti" class="nav-link">Contatti</a></li>
       <li class="nav-item"><a href="/prezzi" class="nav-link">Prezzi</a></li>
       <li class="nav-item mobile-cta-item"><a href="#contatti" class="btn-header mobile-popup-cta">Prenota Ora</a></li>
     </ul>
