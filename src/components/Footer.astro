@@ -1,0 +1,227 @@
+---
+// src/components/Footer.astro
+import logoWhite from '../images/Sambo Bike Rent Logo Orizzontale White PNG.png';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="main-footer">
+  <div class="footer-container">
+    
+    <!-- PARTE SUPERIORE: LOGO E LINK RAPIDI -->
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo-link" aria-label="Sambo Bike Rent Home">
+          <img src={logoWhite.src} alt="Sambo Bike Rent" class="footer-logo-img" />
+        </a>
+        <p class="footer-tagline">
+          Esplora il territorio di San Bonifacio e della Lessinia su due ruote con le nostre e-bike di ultima generazione.
+        </p>
+      </div>
+
+      <div class="footer-nav-grid">
+        <div class="footer-nav-col">
+          <h3>Navigazione</h3>
+          <ul>
+            <li><a href="/#about">Chi Siamo</a></li>
+            <li><a href="/#showcase">La Bici</a></li>
+            <li><a href="/#offerta">Cosa Ricevi</a></li>
+            <li><a href="/prezzi">Listino Prezzi</a></li>
+            <li><a href="/#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-col">
+          <h3>Orari Ritiro</h3>
+          <ul>
+            <li><span>Lun - Ven:</span> 09:00 - 12:30 / 15:30 - 19:00</li>
+            <li><span>Sabato:</span> 09:30 - 12:30</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINEA DIVISORIA GEOMETRICA -->
+    <div class="footer-divider"></div>
+
+    <!-- PARTE INFERIORE: COPYRIGHT E LEGALS -->
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; {currentYear} Sambo Bike Rent. Tutti i diritti riservati.
+      </p>
+      <div class="footer-legals">
+         <!--
+        <a href="/privacy-policy" class="legal-link">Privacy Policy</a>
+        <a href="/cookie-policy" class="legal-link">Cookie Policy</a>
+        -->
+        <span class="credits">Design by <a href="https://mattiasalvato.it" target="_blank" rel="noopener noreferrer" style="color: #dbff9b;">Mattia Salvato</a></span>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  /* ==========================================
+     STRUTTURA DARK MINIMALE STILE INCLUSO
+     ========================================== */
+  .main-footer {
+    width: 100%;
+    background-color: #111111; /* Stesso nero fumo di Contatti.astro */
+    color: #ffffff;
+    padding: 80px 40px 40px 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Separatore quasi invisibile */
+    position: relative;
+    z-index: 10;
+  }
+
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ==========================================
+     PARTE SUPERIORE (BRAND + COLONNE)
+     ========================================== */
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand {
+    max-width: 360px;
+  }
+
+  .footer-logo-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    width: 180px;
+  }
+
+  .footer-logo-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .footer-tagline {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #888888; /* Grigio tech smorzato */
+    margin: 0;
+  }
+
+  .footer-nav-grid {
+    display: flex;
+    gap: 80px;
+  }
+
+  .footer-nav-col h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #dbff9b; /* Verde acido tech */
+    margin: 0 0 24px 0;
+  }
+
+  .footer-nav-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-nav-col ul li {
+    font-size: 0.95rem;
+    color: #aaaaaa;
+  }
+
+  .footer-nav-col ul a {
+    color: #aaaaaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-nav-col ul a:hover {
+    color: #ffffff; /* Sbianca al passaggio */
+  }
+
+  .footer-nav-col span {
+    color: #666666;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  /* ==========================================
+     DIVIDER E PARTE INFERIORE
+     ========================================== */
+  .footer-divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+    margin-bottom: 35px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .copyright {
+    font-size: 0.85rem;
+    color: #666666;
+    margin: 0;
+  }
+
+  .footer-legals {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .legal-link {
+    font-size: 0.85rem;
+    color: #666666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .legal-link:hover {
+    color: #888888;
+  }
+
+  .credits {
+    font-size: 0.85rem;
+    color: #444444;
+  }
+
+  /* ==========================================
+     RESPONSIVE DESIGN DI PRECISIONE
+     ========================================== */
+  @media (max-width: 1024px) {
+    .main-footer { padding: 60px 30px 30px 30px; }
+    .footer-top { flex-direction: column; gap: 50px; }
+    .footer-brand { max-width: 100%; }
+    .footer-nav-grid { gap: 60px; justify-content: flex-start; }
+  }
+
+  @media (max-width: 768px) {
+    .main-footer { padding: 50px 20px 25px 20px; }
+    .footer-nav-grid { flex-direction: column; gap: 40px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .footer-legals { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-divider { margin-bottom: 25px; }
+  }
+</style>
