@@ -1,5 +1,5 @@
 ---
-// Sezione Contatti con animazione di ingresso, icone calibrate e responsive flessibile
+// Contatti.astro - Versione Tech-Dark coordinata con Incluso.astro
 ---
 
 <div class="contact-scroll-wrapper" id="contatti">
@@ -42,14 +42,15 @@
         </div>
 
         <div class="annotation-contact">
-          <span class="handwritten">Ti rispondiamo in 24h</span>
+          <span class="handwritten">Il nostro team ti risponderà il prima possibile</span>
         </div>
       </div>
 
       <div class="contact-form-container">
         <div class="form-card">
-          <p class="form-info-text">Invia la tua richiesta di prenotazione, verificheremo la disponibilità della flotta in pochi minuti e ti invieremo la conferma via mail/WhatsApp</p>
+          <p class="form-info-text">Invia la tua richiesta di prenotazione, verificheremo la disponibilità della flotta e ti invieremo la conferma via mail/WhatsApp</p>
           <div class="embed-placeholder">
+            <!-- NOTA: Assicurati che nel tuo Tally sia impostato il tema Dark o Transparente nelle opzioni di Tally per integrarsi al 100% -->
             <iframe data-tally-src="https://tally.so/embed/44OVYd?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="929" frameborder="0" marginheight="0" marginwidth="0" title="Sambo Bike Rent"></iframe>
             <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>   
           </div>
@@ -77,18 +78,18 @@
   }
 
   document.addEventListener('DOMContentLoaded', initContactAnimation);
-  window.addEventListener('load', initContactAnimation);
+  document.addEventListener('astro:page-load', initContactAnimation); // Supporto nativo View Transitions
 </script>
 
 <style>
   /* ==========================================
-     CONTENITORE E ZOOM INGRESSO
+     CONTENITORE E ZOOM INGRESSO (DARK STYLING)
      ========================================== */
   .contact-scroll-wrapper {
     width: 100%;
-    background-color: #D8D5CD;
+    background-color: #111111; /* Sfondo nero profondo stile Incluso */
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.98);
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease-out;
     will-change: transform, opacity;
   }
@@ -107,6 +108,7 @@
     margin: 0 auto;
     font-family: 'Plus Jakarta Sans', sans-serif;
     box-sizing: border-box;
+    color: #ffffff;
   }
 
   .contact-grid {
@@ -121,38 +123,43 @@
      ========================================== */
   .contact-info-block {
     position: sticky;
-    top: 100px; /* Rimane bloccato a lato se il form di Tally è molto lungo */
+    top: 120px; /* Coordinato con l'altezza del nuovo header */
   }
 
   .section-badge {
-    color: #1d1d1d;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
     font-weight: 700;
-    margin: 0 0 20px 0;
+    letter-spacing: 2px;
+    color: #dbff9b; /* Verde acido tech di Incluso */
+    border: 1px solid rgba(219, 255, 155, 0.2);
+    padding: 6px 14px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 25px;
+    background: rgba(219, 255, 155, 0.03);
   }
 
   .contact-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(2.5rem, 4.5vw, 3.8rem);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.1;
-    color: #111;
+    color: #ffffff;
     margin: 0 0 30px 0;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
   }
 
   .highlight {
     font-style: italic;
     font-weight: 400;
-    color: #111;
+    color: #ffffff;
   }
 
   .contact-subtitle {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.6;
-    color: #444;
+    color: #888888;
     margin: 0 0 50px 0;
     max-width: 500px;
   }
@@ -169,35 +176,42 @@
     gap: 20px;
   }
 
-  /* FIX: Icone calibrate con contenitore proporzionato */
+  /* FIX ECCEZIONALE: Icone regolate geometricamente senza schiacciamenti */
   .icon-circle {
-    width: 15px;
-    height: 15px;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
-    color: #111;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+    font-size: 1rem;
+    color: #dbff9b; /* Icone accese di verde acido */
+    transition: all 0.3s ease;
     flex-shrink: 0;
+  }
+
+  .info-item:hover .icon-circle {
+    background: #dbff9b;
+    color: #111111;
+    border-color: #dbff9b;
+    box-shadow: 0 0 20px rgba(219, 255, 155, 0.2);
   }
 
   .info-text span {
     display: block;
     font-size: 0.75rem;
     text-transform: uppercase;
-    color: #777;
+    color: #666666;
     font-weight: 700;
     letter-spacing: 1px;
   }
 
   .info-text p {
     font-size: 1.1rem;
-    font-weight: 600;
-    color: #111;
+    font-weight: 500;
+    color: #ffffff;
     margin: 4px 0 0 0;
   }
 
@@ -211,8 +225,8 @@
   .handwritten {
     font-family: 'Caveat', cursive;
     font-size: 1.7rem;
-    color: #1d1d1d;
-    font-weight: 600;
+    color: #dbff9b;
+    font-weight: 500;
   }
 
   /* ==========================================
@@ -224,14 +238,13 @@
   }
 
   .form-card {
-    background: #ffffff;
+    background: #161616; /* Card scura leggermente rialzata */
     padding: 48px;
     border-radius: 24px;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.02);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.05);
     box-sizing: border-box;
     
-    /* Animazione interna alla card desktop */
     opacity: 0;
     transform: translateY(30px);
     transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, opacity 0.8s ease-out 0.2s;
@@ -243,13 +256,13 @@
   }
 
   .form-info-text {
-    color: #cc2929; /* Rosso tecnico scuro accessibile */
+    color: #dbff9b; /* Evidenziato per dare un messaggio chiaro e pulito */
     font-size: 0.95rem;
     line-height: 1.5;
     font-weight: 500;
     margin: 0 0 30px 0;
     padding-bottom: 20px;
-    border-bottom: 1px solid #f0edf6;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
   .embed-placeholder {
@@ -261,24 +274,13 @@
      MEDIA QUERIES - RESPONSIVE DI PRECISIONE
      ========================================== */
   @media (max-width: 1200px) {
-    .contact-grid {
-      gap: 40px;
-    }
-    .form-card {
-      padding: 32px;
-    }
+    .contact-grid { gap: 40px; }
+    .form-card { padding: 32px; }
   }
 
   @media (max-width: 1024px) {
-    .contact-section {
-      padding: 100px 32px;
-    }
-    
-    .contact-grid {
-      grid-template-columns: 1fr; /* Passaggio a singola colonna stabile */
-      gap: 60px;
-    }
-
+    .contact-section { padding: 100px 32px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 60px; }
     .contact-info-block {
       position: relative;
       top: 0;
@@ -287,13 +289,7 @@
       flex-direction: column;
       align-items: center;
     }
-
-    .contact-subtitle {
-      max-width: 650px;
-      margin-bottom: 40px;
-    }
-
-    /* Mantiene le icone affiancate in orizzontale su tablet per salvare spazio verticale */
+    .contact-subtitle { max-width: 650px; margin-bottom: 40px; }
     .info-items {
       flex-direction: row;
       justify-content: center;
@@ -301,53 +297,28 @@
       gap: 40px;
       width: 100%;
     }
-
-    .info-item {
-      text-align: left;
-    }
-
-    .annotation-contact {
-      margin-top: 40px;
-    }
+    .info-item { text-align: left; }
+    .annotation-contact { margin-top: 40px; }
   }
 
   @media (max-width: 768px) {
-    .contact-section {
-      padding: 80px 20px;
-    }
-
-    .contact-title {
-      font-size: 2.4rem;
-    }
-
+    .contact-section { padding: 80px 20px; }
+    .contact-title { font-size: 2.4rem; }
     .info-items {
-      flex-direction: column; /* Incolonna su smartphone */
+      flex-direction: column;
       align-items: flex-start;
       gap: 24px;
       max-width: 320px;
       margin: 0 auto;
     }
-
-    .info-item {
-      width: 100%;
-    }
-
+    .info-item { width: 100%; }
     .form-card {
       padding: 24px;
       border-radius: 20px;
-      /* Disattiva ritardi animazione per fluidità touch */
       opacity: 1 !important;
       transform: none !important;
     }
-
-    .form-info-text {
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-    }
-
-    .contact-scroll-wrapper {
-      transform: none !important;
-      opacity: 1 !important;
-    }
+    .form-info-text { font-size: 0.9rem; margin-bottom: 20px; }
+    .contact-scroll-wrapper { transform: none !important; opacity: 1 !important; }
   }
 </style>

@@ -1,0 +1,27 @@
+---
+// src/pages/prezzi.astro
+import Layout from '../layouts/Layout.astro';
+import PrezziComponent from '../components/Prezzi.astro';
+import Contatti from '../components/Contatti.astro';
+---
+
+<Layout 
+  title="Listino Prezzi Noleggio E-Bike | Sambo Bike Rent" 
+  description="Scopri i nostri prezzi e tariffe per il noleggio di biciclette e e-bike a San Bonifacio."
+  isTransparent={false} 
+>
+  <main class="prezzi-page-wrapper">
+    <PrezziComponent />
+  </main>
+  
+  <Contatti />
+</Layout>
+
+<style>
+  .prezzi-page-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f4f3ef; /* Mantiene lo sfondo coordinato */
+    padding-top: 50px; /* Spazio protettivo per non far finire i testi sotto l'header nero fisso */
+  }
+</style>

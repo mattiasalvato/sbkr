@@ -1,0 +1,227 @@
+---
+// src/components/FAQ.astro
+
+const faqs = [
+  {
+    question: "Cosa è incluso nel prezzo del noleggio?",
+    answer: "Ogni noleggio include la e-bike perfettamente revisionata, un casco di protezione omologato, un lucchetto di sicurezza ad alta resistenza e un kit di riparazione rapida per le forature. Per i noleggi di più giorni forniamo anche il caricabatterie rapido."
+  },
+  {
+    question: "È richiesta una cauzione al momento del ritiro?",
+    answer: "Sì, per il noleggio delle e-bike è richiesta una cauzione tramite pre-autorizzazione su carta di credito o contanti. L'importo verrà interamente svincolato al momento della riconsegna del mezzo, previa verifica dell'assenza di danni strutturali."
+  },
+  {
+    question: "Cosa succede in caso di foratura o problemi tecnici?",
+    answer: "Insieme alla bici ti forniremo un pratico kit di riparazione rapida sottosella. Se il problema dovesse essere più grave, ti basta contattare il nostro numero di assistenza tecnica dedicato: interverremo sul percorso per darti supporto o sostituire il mezzo."
+  },
+  {
+    question: "Posso cancellare o modificare la mia prenotazione?",
+    answer: "Certamente. Puoi cancellare o modificare gratuitamente la tua prenotazione fino a 24 ore prima dell'orario di ritiro previsto. Oltre questo termine o in caso di mancato ritiro, l'acconto versato verrà trattenuto come penale."
+  },
+  {
+    question: "I minorenni possono utilizzare le e-bike?",
+    answer: "I minorenni possono utilizzare i nostri mezzi solo se accompagnati da un genitore o da un adulto che ne assuma la responsabilità legale, firmando il contratto di noleggio e scarico responsabilità al momento del ritiro."
+  }
+];
+---
+
+<section class="faq-section" id="faq">
+  <div class="faq-container">
+    
+    <div class="faq-header">
+      <h2 class="faq-title">Domande <span class="italic-title">Frequenti</span></h2>
+      <p class="faq-description">
+        Tutto quello che c'è da sapere prima di salire in sella. Risposte rapide per eliminare ogni dubbio.
+      </p>
+    </div>
+
+    <div class="faq-list">
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>{faq.question}</span>
+            <span class="faq-icon-box">
+              <svg class="faq-icon" width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ==========================================
+     STRUTTURA LIGHT TECH (COORDINATA AL BEIGE)
+     ========================================== */
+  .faq-section {
+    padding: 120px 40px;
+    background-color: #f4f3ef; /* Lo stesso identico beige delle pagine chiare */
+    color: #1a1a1a;
+    width: 100%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    position: relative;
+    z-index: 10;
+  }
+
+  .faq-container {
+    max-width: 1000px; /* Rigoroso allineamento geometrico */
+    margin: 0 auto;
+  }
+
+  .faq-header {
+    text-align: left; /* Layout asimmetrico in stile Incluso.astro */
+    max-width: 650px;
+    margin-bottom: 70px;
+  }
+
+  .faq-badge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #1a1a1a;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 6px 14px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 25px;
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .faq-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    margin: 0 0 20px 0;
+  }
+
+  .italic-title {
+    font-weight: 400;
+    font-style: italic;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1a1a1a;
+  }
+
+  .faq-description {
+    font-size: 1.1rem;
+    color: #555555; /* Grigio scuro soft e leggibile */
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ==========================================
+     SISTEMA ACCORDION CHIARO SOTTILE
+     ========================================== */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .faq-item {
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Linee scure sottili sottilissime */
+    padding: 30px 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  .faq-item:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .faq-item[open] {
+    background-color: rgba(0, 0, 0, 0.01); /* Un velo di contrasto quando si apre */
+  }
+
+  .faq-question {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 30px;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Cerchio icona minimale */
+  .faq-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    color: #1a1a1a;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+  }
+
+  /* Hover sulla domanda: il cerchio diventa nero pieno e l'icona bianca */
+  .faq-item:hover .faq-icon-box {
+    background-color: #111111;
+    border-color: #111111;
+    color: #ffffff;
+  }
+
+  /* Quando è aperto ruota diventando una X e rimane solido */
+  .faq-item[open] .faq-icon-box {
+    transform: rotate(45deg);
+    background-color: #111111;
+    border-color: #111111;
+    color: #ffffff;
+  }
+
+  .faq-answer {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #444444;
+    padding-top: 20px;
+    max-width: 800px;
+    animation: techSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes techSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ==========================================
+     RESPONSIVE DI PRECISIONE
+     ========================================== */
+  @media (max-width: 1024px) {
+    .faq-section { padding: 90px 30px; }
+    .faq-title { font-size: 2.8rem; }
+    .faq-question { font-size: 1.15rem; }
+  }
+
+  @media (max-width: 768px) {
+    .faq-section { padding: 70px 20px; }
+    .faq-title { font-size: 2.3rem; }
+    .faq-question { font-size: 1.05rem; gap: 20px; }
+    .faq-item { padding: 24px 5px; }
+    .faq-icon-box { width: 30px; height: 30px; }
+  }
+</style>

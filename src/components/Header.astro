@@ -1,13 +1,15 @@
 ---
-// Header.astro - Fix definitivo per il glitch del logo gigante allo scroll
+// Header.astro - Fix definitivo per il glitch del logo gigante allo scroll e supporto pagine chiare
 import logoWhite from '../images/Sambo Bike Rent Logo Orizzontale White PNG.png';
 import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png';
+const { isTransparent = true } = Astro.props;
 ---
 
-<nav class="main-header" id="globalHeader">
+<!-- FIX STRUTTURALE: Se isTransparent è false, Astro applica all'istante la classe 'header-solid-page' -->
+<nav class={`main-header ${!isTransparent ? 'header-solid-page' : ''}`} id="globalHeader">
   <div class="header-container">
     
-    <a href="#home" class="brand-logo" aria-label="Sambo Bike Rent Home">
+    <a href="https://www.sambobikerent.it" class="brand-logo" aria-label="Sambo Bike Rent Home">
       <div class="logo-wrapper">
         <img src={logoWhite.src} alt="Sambo Bike Rent" class="logo-img logo-white" />
         <img src={logoBlack.src} alt="Sambo Bike Rent" class="logo-img logo-black" />
@@ -16,9 +18,10 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
 
     <ul class="nav-menu" id="navMenu">
       <li class="nav-item"><a href="#about" class="nav-link">Chi Siamo</a></li>
-      <li class="nav-item"><a href="#showcase" class="nav-link">Le Bici</a></li>
+      <li class="nav-item"><a href="#showcase" class="nav-link">La Bici</a></li>
       <li class="nav-item"><a href="#offerta" class="nav-link">Cosa Ricevi</a></li>
       <li class="nav-item"><a href="#contatti" class="nav-link">Contatti</a></li>
+      <li class="nav-item"><a href="/prezzi" class="nav-link">Prezzi</a></li>
       <li class="nav-item mobile-cta-item"><a href="#contatti" class="btn-header mobile-popup-cta">Prenota Ora</a></li>
     </ul>
 
@@ -33,6 +36,7 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
     </div>
 
   </div>
+  
 </nav>
 
 <script>
@@ -42,12 +46,14 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
     const menu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-link, .mobile-popup-cta');
 
-    let lastScrollY = window.scrollY;
-
     if (!header) return;
 
-    // Stato iniziale al caricamento della pagina (se l'utente rinfresca a metà pagina)
-    if (window.scrollY > 40) {
+    let lastScrollY = window.scrollY;
+    // Controlliamo se la pagina corrente è una pagina solida (come prezzi)
+    const isSolidPage = header.classList.contains('header-solid-page');
+
+    // Stato iniziale al caricamento
+    if (window.scrollY > 40 || isSolidPage) {
       header.classList.add('header-scrolled');
     }
 
@@ -56,15 +62,15 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
 
       const currentScrollY = window.scrollY;
 
-      // Scomparsa/Apparizione intelligente
+      // 1. Scomparsa/Apparizione intelligente allo scroll
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
         header.classList.add('header-hidden');
       } else {
         header.classList.remove('header-hidden');
       }
 
-      // Cambio stato background e logo
-      if (currentScrollY > 40) {
+      // 2. CAMBIO STATO BACKGROUND (CORRETTO)
+      if (currentScrollY > 40 || isSolidPage) {
         header.classList.add('header-scrolled');
       } else {
         header.classList.remove('header-scrolled');
@@ -73,6 +79,7 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
       lastScrollY = currentScrollY;
     });
 
+    // Logica Menu Mobile
     if (menuBtn && menu) {
       menuBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -90,7 +97,7 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
           header.classList.add('mobile-menu-active');
         } else {
           header.classList.remove('mobile-menu-active');
-          if (window.scrollY <= 40) {
+          if (window.scrollY <= 40 && !isSolidPage) {
             header.classList.remove('header-scrolled');
           }
         }
@@ -109,13 +116,14 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
     }
   }
 
+  // Monitora sia il caricamento classico sia i cambi pagina fluidi di Astro
   document.addEventListener('DOMContentLoaded', initHeaderLogic);
   document.addEventListener('astro:page-load', initHeaderLogic);
 </script>
 
 <style>
   /* ==========================================
-     STRUTTURA DESKTOP BASE
+     STRUTTURA DESKTOP BASE (In cima alla pagina)
      ========================================== */
   .main-header {
     position: fixed;
@@ -125,21 +133,32 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
     z-index: 100;
     padding: 24px 0;
     background-color: transparent;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, padding 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
     will-change: transform, background-color, padding;
   }
 
+  /* ==========================================
+     STATO SCROLLED (Quando si scivola in basso) - FIXATO
+     ========================================== */
   .main-header.header-scrolled {
     padding: 14px 0;
-    background-color: rgba(255, 255, 255, 0.85);
+    /* Alziamo l'opacità a 0.95 per coprire i testi sotto ed evitare l'effetto trasparenza fastidioso */
+    background-color: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
+  /* Forza TUTTI i link a diventare scuri e leggibili allo scroll */
   .main-header.header-scrolled .nav-link {
-    color: #111111;
+    color: #111111 !important;
+  }
+
+  /* Forza il pulsante "Prenota Ora" a invertire i colori allo scroll */
+  .main-header.header-scrolled .btn-header {
+    background-color: #111111 !important;
+    color: #ffffff !important;
   }
 
   .main-header.header-hidden {
@@ -157,12 +176,26 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
   }
 
   /* ==========================================
+     VARIANTE SOLID PAGE (Prezzi, Contatti, etc.)
+     ========================================== */
+  .main-header.header-solid-page:not(.header-scrolled) {
+    background-color: #1d1d1d !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .main-header.header-solid-page:not(.header-scrolled) .btn-header {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  /* ==========================================
      FIX LOGO: Struttura rigida anti-glitch
      ========================================== */
   .brand-logo {
     display: block;
     z-index: 120; 
-    width: 180px; /* Definisce la larghezza fissa dell'area logo */
+    width: 180px; 
     min-width: 180px;
     text-decoration: none;
   }
@@ -170,7 +203,7 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
   .logo-wrapper {
     position: relative;
     width: 100%;
-    height: 45px; /* Definisce l'altezza fissa per bloccare il resizing */
+    height: 45px; 
     display: flex;
     align-items: center;
   }
@@ -181,39 +214,25 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Forza l'immagine a stare dentro i limiti impostati */
+    object-fit: contain; 
     transition: opacity 0.3s ease, transform 0.3s ease;
     will-change: opacity;
   }
 
-  /* Stato iniziale (In cima alla pagina) */
-  .logo-white {
-    opacity: 1;
-    z-index: 2;
-  }
+  /* Stato iniziale */
+  .logo-white { opacity: 1; z-index: 2; }
+  .logo-black { opacity: 0; z-index: 1; }
 
-  .logo-black {
-    opacity: 0;
-    z-index: 1;
-  }
+  /* Gestione loghi per pagina solida */
+  .main-header.header-solid-page:not(.header-scrolled) .logo-white { opacity: 1 !important; }
+  .main-header.header-solid-page:not(.header-scrolled) .logo-black { opacity: 0 !important; }
 
-  /* Stato Scrolled (Quando scendi con la pagina) */
-  .main-header.header-scrolled .logo-white {
-    opacity: 0;
-  }
+  /* Inversione loghi allo scroll */
+  .main-header.header-scrolled .logo-white { opacity: 0 !important; }
+  .main-header.header-scrolled .logo-black { opacity: 1 !important; }
 
-  .main-header.header-scrolled .logo-black {
-    opacity: 1;
-  }
-
-  /* Stato quando il Menu Mobile è Aperto */
-  .main-header.mobile-menu-active .logo-white {
-    opacity: 0 !important;
-  }
-
-  .main-header.mobile-menu-active .logo-black {
-    opacity: 1 !important;
-  }
+  .main-header.mobile-menu-active .logo-white { opacity: 0 !important; }
+  .main-header.mobile-menu-active .logo-black { opacity: 1 !important; }
 
   /* ==========================================
      ELEMENTI MENU DI NAVIGAZIONE
@@ -302,7 +321,8 @@ import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png'
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background-color 0.3s ease;
   }
 
-  .main-header.header-scrolled .hamburger-btn .bar { background-color: #111111; }
+  .main-header.header-scrolled .hamburger-btn .bar { background-color: #111111 !important; }
+  .main-header.header-solid-page:not(.header-scrolled) .hamburger-btn .bar { background-color: #ffffff !important; }
 
   .hamburger-btn.is-active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: #111111 !important; }
   .hamburger-btn.is-active .bar:nth-child(2) { opacity: 0; }

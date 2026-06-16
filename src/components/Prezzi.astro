@@ -1,0 +1,461 @@
+---
+// Prezzi.astro - Listino Prezzi Interattivo con Tab Switching e Stile Tech
+---
+
+<section class="prezzi-section" id="prezzi">
+  <div class="prezzi-header">
+    <p class="section-badge">Tariffe Trasparenti</p>
+    <h2 class="section-title">Scegli la tua <span class="highlight-text">durata</span></h2>
+    <p class="section-subtitle">
+      Soluzioni flessibili per ogni tipo di avventura. Più a lungo pedali, più risparmi. Casco e assicurazione RC sono sempre inclusi nel prezzo.
+    </p>
+  </div>
+
+  <!-- SISTEMA DI TAB SWITCHER -->
+  <div class="tab-container">
+    <div class="tab-nav" role="tablist">
+      <button class="tab-btn active" data-target="breve">Breve Termine</button>
+      <button class="tab-btn" data-target="weekend">Weekend & Eco</button>
+      <button class="tab-btn" data-target="lungo">Lungo Termine</button>
+    </div>
+
+    <div class="tab-content-wrapper">
+      
+      <!-- TAB 1: BREVE TERMINE -->
+      <div class="tab-pane active" id="breve">
+        <div class="cards-grid">
+          <div class="price-card">
+            <span class="card-badge">Ideale pausa pranzo</span>
+            <h3>Mezza Giornata</h3>
+            <p class="duration">Massimo 4 ore</p>
+            <div class="price-value">
+              <span class="currency">€</span>
+              <span class="amount">25</span>
+            </div>
+            <ul class="features-list">
+              <li>* Batteria carica al 100%</li>
+              <li>* Lucchetto e Casco inclusi</li>
+              <li>* Tracce GPS consigliate (.gpx)</li>
+            </ul>
+            <a href="#contatti" class="btn-price">Richiedi Info</a>
+          </div>
+
+          <div class="price-card featured">
+            <span class="card-badge primary">Il più richiesto</span>
+            <h3>Giornata Intera</h3>
+            <p class="duration">Fino a 24 ore</p>
+            <div class="price-value">
+              <span class="currency">€</span>
+              <span class="amount">45</span>
+            </div>
+            <ul class="features-list">
+              <li>* Caricabatterie rapido incluso</li>
+              <li>* Kit Fast Repair sottosella</li>
+              <li>* Assistenza tecnica 24/7 sul percorso</li>
+            </ul>
+            <a href="#contatti" class="btn-price premium">Prenota Ora</a>
+          </div>
+
+          <div class="price-card">
+            <span class="card-badge">Esplorazione totale</span>
+            <h3>2 Giorni</h3>
+            <p class="duration">48 ore consecutive</p>
+            <div class="price-value">
+              <span class="currency">€</span>
+              <span class="amount">80</span>
+            </div>
+            <ul class="features-list">
+              <li>* Risparmi 10€ sulla tariffa giornaliera</li>
+              <li>* Caricabatterie rapido da viaggio</li>
+              <li>* Accesso a tutti gli itinerari Lessini</li>
+            </ul>
+            <a href="#contatti" class="btn-price">Richiedi Info</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: WEEKEND & ECO -->
+      <div class="tab-pane" id="weekend">
+        <div class="cards-grid">
+          <div class="price-card featured">
+            <span class="card-badge primary">Fuga dalla città</span>
+            <h3>Formula Weekend</h3>
+            <p class="duration">Venerdì sera ➔ Lunedì mattina</p>
+            <div class="price-value">
+              <span class="currency">€</span>
+              <span class="amount">110</span>
+            </div>
+            <ul class="features-list">
+              <li>* Ritiro flessibile il venerdì</li>
+              <li>* Doppia batteria (opzionale con extra)</li>
+              <li>* Copertura RC totale inclusa</li>
+            </ul>
+            <a href="#contatti" class="btn-price premium">Blocca il Weekend</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: LUNGO TERMINE -->
+      <div class="tab-pane" id="lungo">
+        <div class="cards-grid">
+          <div class="price-card">
+            <span class="card-badge">Vera vacanza</span>
+            <h3>Una Settimana</h3>
+            <p class="duration">7 giorni di libertà</p>
+            <div class="price-value">
+              <span class="currency">€</span>
+              <span class="amount">220</span>
+            </div>
+            <ul class="features-list">
+              <li>* Paghi solo 31€ al giorno</li>
+              <li>* Check-up tecnico gratuito a metà settimana</li>
+              <li>* Sostituzione immediata in caso di guasto</li>
+            </ul>
+            <a href="#contatti" class="btn-price">Affitta per 7gg</a>
+          </div>
+
+          <div class="price-card featured">
+            <span class="card-badge primary">Senza pensieri</span>
+            <h3>Un Mese Intero</h3>
+            <p class="duration">30 giorni ad abbonamento</p>
+            <div class="price-value">
+              <span class="currency">€</span>
+              <span class="amount">490</span>
+            </div>
+            <ul class="features-list">
+              <li>* Meno di 17€ al giorno!</li>
+              <li>* Manutenzione ordinaria inclusa</li>
+              <li>* Perfetto per locals o lunghi soggiorni</li>
+            </ul>
+            <a href="#contatti" class="btn-price premium">Attiva Abbonamento</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function initPrezziTabs() {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panes = document.querySelectorAll('.tab-pane');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-target');
+
+        // Rimuovi active dai bottoni
+        tabs.forEach(t => t.classList.remove('active'));
+        // Rimuovi active dai pannelli
+        panes.forEach(p => p.classList.remove('active'));
+
+        // Attiva quello corrente
+        tab.classList.add('active');
+        const activePane = document.getElementById(target);
+        if (activePane) activePane.classList.add('active');
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initPrezziTabs);
+  document.addEventListener('astro:page-load', initPrezziTabs);
+</script>
+
+<style>
+  /* ==========================================
+     STRUTTURA SEZIONE PREZZI ACCOGLIENTE
+     ========================================== */
+  .prezzi-section {
+    width: 100%;
+    background-color: #f4f3ef; /* Beige chiaro per staccare dal nero di Incluso.astro */
+    color: #1a1a1a;
+    padding: 120px 60px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+    z-index: 20; /* Scorre sopra il resto nel flusso */
+  }
+
+  .prezzi-header {
+    text-align: center;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section-badge {
+    color: #1a1a1a;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 6px 16px;
+    border-radius: 50px;
+  }
+
+  .section-title {
+    font-size: 3.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 25px 0;
+    letter-spacing: -0.03em;
+  }
+
+  .highlight-text {
+    color: #111;
+    font-weight: 400;
+    font-style: italic;
+    text-decoration: underline;
+    text-decoration-color: #dbff9b;
+    text-decoration-thickness: 6px;
+  }
+
+  .section-subtitle {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+  }
+
+  /* ==========================================
+     SISTEMA DEI NAV TAB (SWITCHER)
+     ========================================== */
+  .tab-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .tab-nav {
+    background: rgba(0, 0, 0, 0.04);
+    padding: 6px;
+    border-radius: 50px;
+    display: flex;
+    gap: 5px;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: none;
+    padding: 12px 28px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #666;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tab-btn.active {
+    background: #111111;
+    color: #dbff9b;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  /* PANNELLI DI CONTENUTO CHIASMO */
+  .tab-content-wrapper {
+    width: 100%;
+  }
+
+  .tab-pane {
+    display: none;
+    width: 100%;
+  }
+
+  .tab-pane.active {
+    display: block;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ==========================================
+     GRIGLIA DELLE CARD PREZZO
+     ========================================== */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* LA SINGOLA CARD */
+  .price-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 24px;
+    padding: 40px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  }
+
+  .price-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.07);
+  }
+
+  /* Card Evidenziata (Featured) */
+  .price-card.featured {
+    background: #111111;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  }
+
+  .card-badge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #666;
+    background: rgba(0,0,0,0.05);
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+  }
+
+  .card-badge.primary {
+    color: #111111;
+    background: #dbff9b;
+  }
+
+  .price-card h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .duration {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 30px 0;
+  }
+
+  .price-card.featured .duration {
+    color: #aaa;
+  }
+
+  /* BLOCCO VALORE PREZZO */
+  .price-value {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 30px;
+  }
+
+  .currency {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .amount {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+
+  /* LISTA DELLE CARATTERISTICHE */
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    padding-top: 25px;
+  }
+
+  .price-card.featured .features-list {
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .features-list li {
+    font-size: 0.95rem;
+    color: #444;
+    display: flex;
+    align-items: center;
+  }
+
+  .price-card.featured .features-list li {
+    color: #ddd;
+  }
+
+  /* BOTTONE PREZZI */
+  .btn-price {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 15px 20px;
+    border: 2px solid #111111;
+    border-radius: 50px;
+    color: #111111;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    margin-top: auto; /* Lo spinge sempre in fondo alla card */
+  }
+
+  .btn-price:hover {
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .btn-price.premium {
+    background: #dbff9b;
+    color: #111111;
+    border: 2px solid #dbff9b;
+  }
+
+  .btn-price.premium:hover {
+    background: #ffffff;
+    color: #111111;
+    border-color: #ffffff;
+    transform: scale(1.02);
+  }
+
+  /* ==========================================
+     RESPONSIVE DI PRECISIONE
+     ========================================== */
+  @media (max-width: 1024px) {
+    .prezzi-section { padding: 80px 40px; gap: 45px; }
+    .section-title { font-size: 2.8rem; }
+    .cards-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .price-card { padding: 35px 25px; }
+  }
+
+  @media (max-width: 768px) {
+    .prezzi-section { padding: 60px 20px; gap: 35px; }
+    .section-title { font-size: 2.2rem; }
+    .tab-nav { width: 100%; flex-direction: column; border-radius: 20px; padding: 8px; }
+    .tab-btn { width: 100%; text-align: center; padding: 10px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .amount { font-size: 3.2rem; }
+  }
+</style>

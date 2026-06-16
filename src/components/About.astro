@@ -3,6 +3,9 @@
 import aboutBike1 from '../images/about-bike-1.webp';
 import aboutBike2 from '../images/about-bike-2.webp';
 import aboutBike3 from '../images/about-bike-3.webp';
+import uomoebiketrekking from '../images/uomo-ebike-trekking.jpg';
+import uomoebikesambo from '../images/uomo-ebike-san-bonifacio.webp';
+import uomoebikenatura from '../images/uomo-ebike-natura.webp';
 ---
 
 <div class="about-scroll-trigger" id="about">
@@ -32,7 +35,7 @@ import aboutBike3 from '../images/about-bike-3.webp';
         
         <div class="secondary-text">
           <p>
-            Selezioniamo solo mountain bike ed e-bike di ultima generazione per garantirti il massimo del comfort e delle prestazioni su qualsiasi tipo di percorso. Che tu voglia sfidare i sentieri più ripidi o goderti una pedalata rilassante tra le colline, abbiamo la bici perfetta per la tua prossima avventura.
+            Coniugando potenza, autonomia e comfort, offriamo un modo ecologico e dinamico per scoprire le meraviglie paesaggistiche e culturali della nostra zona. Che tu sia un ciclista esperto o un semplice appassionato, le nostre biciclette elettriche ti porteranno ovunque.
           </p>
         </div>
 
@@ -40,7 +43,7 @@ import aboutBike3 from '../images/about-bike-3.webp';
 
       <div class="image-block-one-bleed parallax-element reveal-image" data-speed="-0.06">
         <div class="image-wrapper-bleed ken-burns tilt-target">
-          <img src={aboutBike1.src} alt="Dettaglio e-bike pronta all'avventura" class="interactive-img" />
+          <img src={uomoebiketrekking.src} alt="Dettaglio e-bike pronta all'avventura" class="interactive-img" />
         </div>
       </div>
     </div>
@@ -48,24 +51,26 @@ import aboutBike3 from '../images/about-bike-3.webp';
     <div class="container lower-grid">
       <div class="image-block-two parallax-element reveal-image" data-speed="0.05">
         <div class="image-wrapper ken-burns tilt-target">
-          <img src={aboutBike2.src} alt="Ciclista sui sentieri" class="interactive-img" />
+          <img src={uomoebikesambo.src} alt="Ciclista sui sentieri" class="interactive-img" />
         </div>
       </div>
       <div class="third-text parallax-element reveal-text" data-speed="-0.02">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin tortor purus platea sit eu id nisi litora libero. Neque vulputate consequat ac amet augue blandit maximus aliquet congue.
+          Dai vigneti storici di Soave fino ai sentieri più suggestivi della Lessinia: scopri la provincia di Verona da una nuova prospettiva, senza l'ansia delle salite ripide.
+        </p>
       </div>
     </div>
 
     <div class="container lower-grid">
       <div class="fourth-text parallax-element reveal-text" data-speed="0.03">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin tortor purus platea sit eu id nisi litora libero. Neque vulputate consequat ac amet augue blandit maximus aliquet congue..
+          Respira l'aria aperta e connettiti con i paesaggi locali. Le nostre e-bike ti permettono di raggiungere mete panoramiche straordinarie mantenendo il pieno controllo della fatica.
+          Abbiamo progettato un'esperienza di cicloturismo che unisce l'avventura alla comodità, rendendo ogni uscita un ricordo indimenticabile. Che tu stia cercando una gita rilassante o una sfida più impegnativa, le nostre biciclette elettriche sono pronte a portarti ovunque tu voglia andare.
         </p>
       </div>
       <div class="image-block-three parallax-element reveal-image" data-speed="-0.05">
         <div class="image-wrapper ken-burns tilt-target">
-          <img src={aboutBike3.src} alt="Trekking sui sentieri" class="interactive-img" />
+          <img src={uomoebikenatura.src} alt="Trekking sui sentieri" class="interactive-img" />
         </div>
       </div>
     </div>
@@ -491,6 +496,11 @@ import aboutBike3 from '../images/about-bike-3.webp';
 
     .scroll-down-indicator { 
       display: none; /* Rimosso sui dispositivi touch */
+    }
+
+    /* Nascondiamo l'SVG su mobile perché i cambi di coordinate fissi su layout a colonna singola fluida si sfaserebbero */
+    .trail-line-container {
+      display: none;
     }
   }
 

@@ -1,57 +1,84 @@
 ---
 // src/layouts/Layout.astro
-
 interface Props {
-	title: string;
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  isTransparent?: boolean; // 👈 Gestisce la trasparenza dell'header tra le varie pagine
 }
-const { title } = Astro.props;
 
+const { title, description, canonicalUrl = Astro.url.href, isTransparent = true } = Astro.props;
+
+import Header from '../components/Header.astro';
 ---
 
 <!doctype html>
 <html lang="it">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Noleggio Bici" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/images/og-image.jpg" /> 
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url.href} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="/images/og-image.jpg" />
+  </head>
+  <body>
+    <!-- 
+      FIX DEFINTIVO: Rimosso l'elemento <header> segnaposto che creava il blocco fantasma duplicato.
+      Ora richiamiamo solo il vero componente <Header /> passandogli la prop della trasparenza.
+    -->
+    <Header isTransparent={isTransparent} />
+    
+    <slot />
+  </body>
 </html>
 
 <style is:global>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
-	* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  /* Import dei font ottimizzato e unificato per evitare chiamate multiple */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
 
-/* Trova html, body nel tuo CSS globale e forzali così: */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  
-  /* SBLOCCO CRITICO: Rimuoviamo hidden e auto, torniamo allo scroll nativo */
-  overflow-x: clip; /* Impedisce lo scroll a destra senza rompere lo sticky */
-  overflow-y: visible; /* Lascia lo scroll verticale totalmente libero */
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-/* Assicurati che anche il contenitore main non crei trappole */
-main, 
-.page-stack-container {
-  width: 100%;
-  position: relative;
-  overflow: visible; /* Massima libertà di movimento per i figli sticky */
-}
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    
+    /* SBLOCCO CRITICO: Impedisce lo scroll a destra senza rompere lo sticky */
+    overflow-x: clip; 
+    overflow-y: visible; /* Lascia lo scroll verticale totalmente libero */
+  }
+
+  main, 
+  .page-stack-container {
+    width: 100%;
+    position: relative;
+    overflow: visible; /* Massima libertà di movimento per i figli sticky */
+  }
+
+  /* Classe di ripiego globale per lo sfondo scuro dell'header */
+  .header-solid {
+    background-color: #1d1d1d !important; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); 
+    backdrop-filter: blur(10px);
+  }
 </style>

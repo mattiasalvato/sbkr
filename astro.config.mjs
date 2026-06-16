@@ -1,7 +1,13 @@
 import { defineConfig } from 'astro/config';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
-  // 1. Sostituisci con il tuo nome utente di GitHub e il nome della repository
-  site: 'https://mattiasalvato.github.io',
-  base: '/sambo-bike-rent-repo',
+  // Inserisci il tuo dominio reale
+  site: 'https://www.sambobikerent.it',
+
+  // Assicurati che sia così o cancellala del tutto
+  base: '/',
+
+  integrations: [sitemap()]
 });

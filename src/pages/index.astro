@@ -1,57 +1,33 @@
 ---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Offer from '../components/Offer.astro';
 import Showcase from '../components/Showcase.astro';
 import Incluso from '../components/Incluso.astro';
 import Contatti from '../components/Contatti.astro';
-import Header from '../components/Header.astro';
-import Layout from '../layouts/Layout.astro';
+import FAQ from '../components/FAQ.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<Layout title="Sambo Bike Rent" />
-		<Header />
-		<Hero />
-		<About />
-		<Offer />
-		<main class="page-stack-container">
-			<Showcase />
-			<Incluso />
-		</main>
-		<Contatti />
-	</body>
-</html>
+<Layout 
+  title="Sambo Bike Rent | Noleggio Biciclette a San Bonifacio" 
+  description="Esplora il territorio su due ruote con le nostre biciclette ed e-bike a noleggio. Prenota online la tua pedalata in totale libertà."
+>
+  <meta slot="head" name="google-site-verification" content="Km9C_E-QfJRW-dxH1LsepojhK1JH2RY7eM-y2763Ugw" />
+
+  <Hero />
+  <About />
+  <Offer />
+  
+  <main class="page-stack-container">
+    <Showcase />
+    <Incluso />
+  </main>
+  <FAQ />
+  <Contatti />
+</Layout>
 
 <style>
-	
-/* Trova html, body nel tuo CSS globale e forzali così: */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  
-  /* SBLOCCO CRITICO: Rimuoviamo hidden e auto, torniamo allo scroll nativo */
-  overflow-x: clip; /* Impedisce lo scroll a destra senza rompere lo sticky */
-  overflow-y: visible; /* Lascia lo scroll verticale totalmente libero */
-}
-
-/* Assicurati che anche il contenitore main non crei trappole */
-main, 
-.page-stack-container {
-  width: 100%;
-  position: relative;
-  overflow: visible; /* Massima libertà di movimento per i figli sticky */
-}
+  /* Il tuo stile specifico per la home se necessario, altrimenti puoi lasciarlo vuoto */
 </style>
