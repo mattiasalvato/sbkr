@@ -12,6 +12,7 @@ const { title, description, canonicalUrl = Astro.url.href, isTransparent = true 
 import Header from '../components/Header.astro';
 import WhatsAppWidget from '../components/WhatsAppWidget.astro'; // 👈 1. Importa il widget qui
 import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 ---
 
 <!doctype html>
@@ -36,6 +37,7 @@ import Footer from '../components/Footer.astro';
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="/images/og-image.png" />
+    <CookieBanner />
   </head>
   <body>
     

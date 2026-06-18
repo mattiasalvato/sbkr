@@ -8,7 +8,6 @@ const currentYear = new Date().getFullYear();
 <footer class="main-footer">
   <div class="footer-container">
     
-    <!-- PARTE SUPERIORE: LOGO E LINK RAPIDI -->
     <div class="footer-top">
       <div class="footer-brand">
         <a href="/" class="footer-logo-link" aria-label="Sambo Bike Rent Home">
@@ -17,6 +16,12 @@ const currentYear = new Date().getFullYear();
         <p class="footer-tagline">
           Esplora il territorio di San Bonifacio e della Lessinia su due ruote con le nostre e-bike di ultima generazione.
         </p>
+        
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/sambobikerent/" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Seguici su Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
       </div>
 
       <div class="footer-nav-grid">
@@ -41,20 +46,16 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <!-- LINEA DIVISORIA GEOMETRICA -->
     <div class="footer-divider"></div>
 
-    <!-- PARTE INFERIORE: COPYRIGHT E LEGALS -->
     <div class="footer-bottom">
       <p class="copyright">
-        &copy; {currentYear} Sambo Bike Rent. Tutti i diritti riservati.
+        &copy; {currentYear} Sambo Bike Rent. Tutti i diritti riservati. | Via Prova, 2 - 37040 San Bonifacio (VR) - P.IVA 04297060230
       </p>
       <div class="footer-legals">
-         <!--
-        <a href="/privacy-policy" class="legal-link">Privacy Policy</a>
-        <a href="/cookie-policy" class="legal-link">Cookie Policy</a>
-        -->
-        <span class="credits">Made by <a href="https://mattiasalvato.it" target="_blank" rel="noopener noreferrer" style="color: #dbff9b;">Mattia Salvato</a></span>
+        <a href="https://www.iubenda.com/privacy-policy/85916554" class="legal-link" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+  <a href="https://www.iubenda.com/privacy-policy/85916554/cookie-policy" class="legal-link" target="_blank" rel="noopener noreferrer">Cookie Policy</a>
+         <span class="credits">Made by <a href="https://mattiasalvato.it" target="_blank" rel="noopener noreferrer" style="color: #dbff9b; text-decoration: none;">Mattia Salvato</a></span>
       </div>
     </div>
 
@@ -113,7 +114,36 @@ const currentYear = new Date().getFullYear();
     font-size: 0.95rem;
     line-height: 1.6;
     color: #888888; /* Grigio tech smorzato */
-    margin: 0;
+    margin: 0 0 25px 0; /* Aggiunto margine per staccare i social */
+  }
+
+  /* STYLE PULITO ED ELEGANTE PER I SOCIAL */
+  .footer-socials {
+    display: flex;
+    gap: 15px;
+  }
+
+  .social-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    color: #aaaaaa;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .social-icon-link:hover {
+    color: #111111;
+    background: #dbff9b; /* Si accende col verde acido del brand */
+    border-color: #dbff9b;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(219, 255, 155, 0.15);
   }
 
   .footer-nav-grid {
