@@ -1,11 +1,10 @@
 ---
-// Header.astro - Fix definitivo per il glitch del logo gigante allo scroll e supporto pagine chiare
+// Header.astro - Versione Ultra-Ottimizzata e Leggera
 import logoWhite from '../images/Sambo Bike Rent Logo Orizzontale White PNG.png';
 import logoBlack from '../images/Sambo Bike Rent Logo Orizzontale Black PNG.png';
 const { isTransparent = true } = Astro.props;
 ---
 
-<!-- FIX STRUTTURALE: Se isTransparent è false, Astro applica all'istante la classe 'header-solid-page' -->
 <nav class={`main-header ${!isTransparent ? 'header-solid-page' : ''}`} id="globalHeader">
   <div class="header-container">
     
@@ -36,40 +35,60 @@ const { isTransparent = true } = Astro.props;
     </div>
 
   </div>
-  
 </nav>
 
 <script>
-  function initHeaderLogic() {
+  function initHeader() {
     const header = document.getElementById('globalHeader');
     const menuBtn = document.getElementById('mobileMenuBtn');
     const menu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-link, .mobile-popup-cta');
 
-    if (!header) return;
+    if (!header || !menuBtn || !menu) return;
 
+    // 1. Gestione apertura/chiusura Menu Mobile (Puro toggle di classi)
+    menuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = menu.classList.toggle('menu-open');
+      menuBtn.classList.toggle('is-active');
+      
+      // Gestione stato header globale
+      header.classList.toggle('mobile-menu-active', isOpen);
+      if (isOpen) header.classList.add('header-scrolled');
+
+      // Il blocco dello scroll lo fa il CSS tramite questa classe sul tag html/body
+      document.documentElement.classList.toggle('lock-scroll', isOpen);
+    });
+
+    // 2. Chiusura quando si clicca un link interno (Ancore)
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('menu-open');
+        menuBtn.classList.remove('is-active');
+        header.classList.remove('mobile-menu-active');
+        document.documentElement.classList.remove('lock-scroll');
+      });
+    });
+
+    // 3. Effetto Scroll (Header compatto / a scomparsa)
     let lastScrollY = window.scrollY;
-    // Controlliamo se la pagina corrente è una pagina solida (come prezzi)
     const isSolidPage = header.classList.contains('header-solid-page');
 
-    // Stato iniziale al caricamento
-    if (window.scrollY > 40 || isSolidPage) {
-      header.classList.add('header-scrolled');
-    }
+    if (window.scrollY > 40 || isSolidPage) header.classList.add('header-scrolled');
 
     window.addEventListener('scroll', () => {
-      if (menu && menu.classList.contains('menu-open')) return;
+      if (menu.classList.contains('menu-open')) return;
 
       const currentScrollY = window.scrollY;
 
-      // 1. Scomparsa/Apparizione intelligente allo scroll
+      // Mostra/Nascondi allo scroll
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
         header.classList.add('header-hidden');
       } else {
         header.classList.remove('header-hidden');
       }
 
-      // 2. CAMBIO STATO BACKGROUND (CORRETTO)
+      // Sfondo bianco/trasparente
       if (currentScrollY > 40 || isSolidPage) {
         header.classList.add('header-scrolled');
       } else {
@@ -77,93 +96,41 @@ const { isTransparent = true } = Astro.props;
       }
 
       lastScrollY = currentScrollY;
-    });
-
-    // Logica Menu Mobile
-    if (menuBtn && menu) {
-      menuBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const isOpen = menu.classList.contains('menu-open');
-        
-        menuBtn.classList.toggle('is-active');
-        menu.classList.toggle('menu-open');
-        document.body.classList.toggle('no-scroll');
-
-        if (!isOpen) {
-          header.classList.remove('header-hidden');
-          header.classList.add('header-scrolled');
-          header.classList.add('mobile-menu-active');
-        } else {
-          header.classList.remove('mobile-menu-active');
-          if (window.scrollY <= 40 && !isSolidPage) {
-            header.classList.remove('header-scrolled');
-          }
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          if (menuBtn && menu) {
-            menuBtn.classList.remove('is-active');
-            menu.classList.remove('menu-open');
-            document.body.classList.remove('no-scroll');
-            header.classList.remove('mobile-menu-active');
-          }
-        });
-      });
-    }
+    }, { passive: true });
   }
 
-  // Monitora sia il caricamento classico sia i cambi pagina fluidi di Astro
-  document.addEventListener('DOMContentLoaded', initHeaderLogic);
-  document.addEventListener('astro:page-load', initHeaderLogic);
+  // Supporto totale al View Transitions / Router di Astro
+  document.addEventListener('DOMContentLoaded', initHeader);
+  document.addEventListener('astro:page-load', initHeader);
 </script>
 
 <style>
   /* ==========================================
-     STRUTTURA DESKTOP BASE (In cima alla pagina)
+     STRUTTURA DESKTOP BASE
      ========================================== */
   .main-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 99999; /* Abbassato per non lottare con iubenda */
     padding: 24px 0;
     background-color: transparent;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
-    will-change: transform, background-color, padding;
+    transition: transform 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
   }
 
-  /* ==========================================
-     STATO SCROLLED (Quando si scivola in basso) - FIXATO
-     ========================================== */
   .main-header.header-scrolled {
     padding: 14px 0;
-    /* Alziamo l'opacità a 0.95 per coprire i testi sotto ed evitare l'effetto trasparenza fastidioso */
-    background-color: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(255, 255, 255, 0.96) !important;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
-  /* Forza TUTTI i link a diventare scuri e leggibili allo scroll */
-  .main-header.header-scrolled .nav-link {
-    color: #111111 !important;
-  }
-
-  /* Forza il pulsante "Prenota Ora" a invertire i colori allo scroll */
-  .main-header.header-scrolled .btn-header {
-    background-color: #111111 !important;
-    color: #ffffff !important;
-  }
-
-  .main-header.header-hidden {
-    transform: translateY(-100%);
-  }
+  .main-header.header-scrolled .nav-link { color: #111111 !important; }
+  .main-header.header-scrolled .btn-header { background-color: #111111 !important; color: #ffffff !important; }
+  .main-header.header-hidden { transform: translateY(-100%); }
 
   .header-container {
     max-width: 1400px;
@@ -172,82 +139,35 @@ const { isTransparent = true } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-sizing: border-box;
   }
 
-  /* ==========================================
-     VARIANTE SOLID PAGE (Prezzi, Contatti, etc.)
-     ========================================== */
   .main-header.header-solid-page:not(.header-scrolled) {
     background-color: #1d1d1d !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
-
   .main-header.header-solid-page:not(.header-scrolled) .btn-header {
     background-color: #ffffff !important;
     color: #111111 !important;
   }
 
-  /* ==========================================
-     FIX LOGO: Struttura rigida anti-glitch
-     ========================================== */
-  .brand-logo {
-    display: block;
-    z-index: 120; 
-    width: 180px; 
-    min-width: 180px;
-    text-decoration: none;
-  }
+  /* LOGO ANTI-GLITCH */
+  .brand-logo { display: block; width: 180px; text-decoration: none; }
+  .logo-wrapper { position: relative; width: 100%; height: 45px; display: flex; align-items: center; }
+  .logo-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.25s ease; }
+  
+  .logo-white { opacity: 1; }
+  .logo-black { opacity: 0; }
 
-  .logo-wrapper {
-    position: relative;
-    width: 100%;
-    height: 45px; 
-    display: flex;
-    align-items: center;
-  }
-
-  .logo-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain; 
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    will-change: opacity;
-  }
-
-  /* Stato iniziale */
-  .logo-white { opacity: 1; z-index: 2; }
-  .logo-black { opacity: 0; z-index: 1; }
-
-  /* Gestione loghi per pagina solida */
   .main-header.header-solid-page:not(.header-scrolled) .logo-white { opacity: 1 !important; }
   .main-header.header-solid-page:not(.header-scrolled) .logo-black { opacity: 0 !important; }
-
-  /* Inversione loghi allo scroll */
   .main-header.header-scrolled .logo-white { opacity: 0 !important; }
   .main-header.header-scrolled .logo-black { opacity: 1 !important; }
-
   .main-header.mobile-menu-active .logo-white { opacity: 0 !important; }
   .main-header.mobile-menu-active .logo-black { opacity: 1 !important; }
 
-  /* ==========================================
-     ELEMENTI MENU DI NAVIGAZIONE
-     ========================================== */
-  .nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
+  /* LINKS DESKTOP */
+  .nav-menu { display: flex; align-items: center; gap: 40px; list-style: none; margin: 0; padding: 0; }
   .mobile-cta-item { display: none; }
-
+  
   .nav-link {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.95rem;
@@ -256,31 +176,17 @@ const { isTransparent = true } = Astro.props;
     text-decoration: none;
     position: relative;
     padding: 6px 0;
-    transition: color 0.3s ease;
+    transition: color 0.25s ease;
   }
 
   .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1.5px;
-    background-color: #111111;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1.5px; background-color: #111111; transform: scaleX(0); transition: transform 0.25s ease;
   }
-
   .main-header:not(.header-scrolled) .nav-link::after { background-color: #ffffff; }
-  .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav-link:hover::after { transform: scaleX(1); }
 
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
+  .header-actions { display: flex; align-items: center; gap: 20px; }
+  
   .btn-header {
     display: inline-block;
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -291,16 +197,12 @@ const { isTransparent = true } = Astro.props;
     font-weight: 600;
     font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
   }
+  .main-header:not(.header-scrolled) .btn-header { background-color: #ffffff; color: #111111 !important; }
 
-  .main-header:not(.header-scrolled) .btn-header {
-    background-color: #ffffff;
-    color: #111111 !important;
-  }
-
+  /* HAMBURGER */
   .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -311,37 +213,31 @@ const { isTransparent = true } = Astro.props;
     border: none;
     cursor: pointer;
     padding: 0;
-    z-index: 120;
   }
-
-  .hamburger-btn .bar {
-    width: 100%;
-    height: 2px;
-    background-color: #ffffff;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background-color 0.3s ease;
-  }
-
+  .hamburger-btn .bar { width: 100%; height: 2px; background-color: #ffffff; transition: all 0.25s ease; }
   .main-header.header-scrolled .hamburger-btn .bar { background-color: #111111 !important; }
-  .main-header.header-solid-page:not(.header-scrolled) .hamburger-btn .bar { background-color: #ffffff !important; }
-
-  .hamburger-btn.is-active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); background-color: #111111 !important; }
-  .hamburger-btn.is-active .bar:nth-child(2) { opacity: 0; }
-  .hamburger-btn.is-active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background-color: #111111 !important; }
 
   /* ==========================================
-     RESPONSIVE INTERFACCIA MOBILE
+     RESPONSIVE ED OVERLAY MOBILE
      ========================================== */
   @media (max-width: 1024px) {
     .header-container { padding: 0 24px; }
     .nav-menu { gap: 24px; }
-    .brand-logo { width: 150px; min-width: 150px; }
+    .brand-logo { width: 150px; }
     .logo-wrapper { height: 38px; }
   }
 
   @media (max-width: 768px) {
     .main-header { padding: 16px 0; }
-    .hamburger-btn { display: flex; } 
+    .hamburger-btn { display: flex; z-index: 10001; position: relative; } 
     .btn-header.desktop-cta { display: none; } 
+    .brand-logo { z-index: 10001; position: relative; }
+
+    /* L'Ancoraggio della X Mobile */
+    .hamburger-btn.is-active .bar { background-color: #111111 !important; }
+    .hamburger-btn.is-active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger-btn.is-active .bar:nth-child(2) { opacity: 0; }
+    .hamburger-btn.is-active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
     .nav-menu {
       position: fixed;
@@ -351,64 +247,50 @@ const { isTransparent = true } = Astro.props;
       height: 100vh;
       height: 100svh; 
       background-color: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 28px;
+      gap: 24px;
       padding: 40px;
       box-sizing: border-box;
       transform: translateX(100%);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 105;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 10000;
     }
 
     .nav-menu.menu-open { transform: translateX(0); }
-
-    .mobile-cta-item {
-      display: block; 
-      width: 100%;
-      max-width: 260px;
-      margin-top: 15px;
-    }
-
-    .mobile-popup-cta {
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      padding: 14px 0;
-      font-size: 0.9rem;
-    }
+    .mobile-cta-item { display: block; width: 100%; max-width: 260px; margin-top: 10px; }
+    .mobile-popup-cta { width: 100%; text-align: center; padding: 14px 0; font-size: 0.9rem; }
 
     .nav-item {
       width: 100%;
       text-align: center;
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      transform: translateY(15px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
-
     .nav-menu.menu-open .nav-item { opacity: 1; transform: translateY(0); }
-    .nav-menu.menu-open .nav-item:nth-child(1) { transition-delay: 0.15s; }
-    .nav-menu.menu-open .nav-item:nth-child(2) { transition-delay: 0.22s; }
-    .nav-menu.menu-open .nav-item:nth-child(3) { transition-delay: 0.29s; }
-    .nav-menu.menu-open .nav-item:nth-child(4) { transition-delay: 0.36s; }
-    .nav-menu.menu-open .nav-item:nth-child(5) { transition-delay: 0.43s; }
+    .nav-menu.menu-open .nav-item:nth-child(1) { transition-delay: 0.1s; }
+    .nav-menu.menu-open .nav-item:nth-child(2) { transition-delay: 0.15s; }
+    .nav-menu.menu-open .nav-item:nth-child(3) { transition-delay: 0.2s; }
+    .nav-menu.menu-open .nav-item:nth-child(4) { transition-delay: 0.25s; }
+    .nav-menu.menu-open .nav-item:nth-child(5) { transition-delay: 0.3s; }
 
-    .nav-link {
-      color: #111111 !important;
-      font-size: 1.5rem; 
-      font-weight: 600;
-      display: inline-block;
-      width: 100%;
-    }
-
+    .nav-link { color: #111111 !important; font-size: 1.4rem; font-weight: 600; display: inline-block; width: 100%; }
     .nav-link::after { display: none; } 
   }
 
-  :global(body.no-scroll) {
-    overflow: hidden;
+  /* ==========================================
+     IL SEGRETO: BLOCCO SCROLL IN PURO CSS 
+     ========================================== */
+  :global(html.lock-scroll), :global(html.lock-scroll body) {
+    overflow: hidden !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    
+    /* Blocca la catena di scroll e il rimbalzo elastico su iOS in modo nativo */
+    overscroll-behavior: contain !important; 
   }
 </style>
