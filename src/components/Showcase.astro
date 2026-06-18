@@ -5,6 +5,7 @@ import cambioBike from '../images/cambio.jpg';
 import contakmBike from '../images/contakm.jpg';
 import manubrioBike from '../images/manubrio.jpg';
 import telaioBike from '../images/telaio.jpg';
+import { Image } from 'astro:assets';
 ---
 
 <div class="showcase-sticky-container" id="showcase">
@@ -18,13 +19,13 @@ import telaioBike from '../images/telaio.jpg';
       <div class="visual-container">
         
         <div class="ebike-interactive-wrapper">
-          <img src={showcaseBike1.src} alt="E-MTB Model" class="hero-img" />
+          <Image src={showcaseBike1} alt="E-MTB Model" class="hero-img" format="webp" />
 
           <div class="hotspot-point" style="top: 30%; left: 48%;">
             <button class="hotspot-trigger" aria-label="Info Motore">+</button>
             <div class="hotspot-popup pop-left">
               <div class="popup-thumb">
-                <img src={telaioBike.src} alt="Telaio Tech" />
+                <Image src={telaioBike} alt="Telaio Tech" format="webp" />
               </div>
               <div class="popup-content">
                 <h3>Telaio</h3>
@@ -37,7 +38,7 @@ import telaioBike from '../images/telaio.jpg';
             <button class="hotspot-trigger" aria-label="Info Batteria">+</button>
             <div class="hotspot-popup pop-top">
               <div class="popup-thumb">
-                <img src={contakmBike.src} alt="Display Digtale" />
+                <Image src={contakmBike} alt="Display Digtale" format="webp" />
               </div>
               <div class="popup-content">
                 <h3>Display Digtale</h3>
@@ -50,7 +51,7 @@ import telaioBike from '../images/telaio.jpg';
             <button class="hotspot-trigger" aria-label="Info Freni">+</button>
             <div class="hotspot-popup pop-right">
               <div class="popup-thumb">
-                <img src={cambioBike.src} alt="Cambio Tech" />
+                <Image src={cambioBike} alt="Cambio Tech" format="webp" />
               </div>
               <div class="popup-content">
                 <h3>Cambio</h3>

@@ -1,13 +1,13 @@
 ---
 // Sezione Impatto: offer.astro con Parallasse, Word Reveal e Responsive Blindato
 import offerBackground from '../images/offer-background.jpg';
-
+import { Image } from 'astro:assets';
 import ebikessoave from '../images/ebikes-soave.webp';
 ---
 
 <header class="offer-container" id="offerSection">
   <div class="offer-bg" id="offerBg">
-    <img src={ebikessoave.src} alt="Esplora in bicicletta" />
+    <Image src={ebikessoave} alt="Esplora in bicicletta" format="webp" />
     <div class="overlay"></div>
   </div>
 

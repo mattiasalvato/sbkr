@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear();
     <div class="footer-top">
       <div class="footer-brand">
         <a href="/" class="footer-logo-link" aria-label="Sambo Bike Rent Home">
-          <img src={logoWhite.src} alt="Sambo Bike Rent" class="footer-logo-img" />
+          <img src={logoWhite.src} alt="Sambo Bike Rent" class="footer-logo-img" width="180" height="31" />
         </a>
         <p class="footer-tagline">
           Esplora il territorio di San Bonifacio e della Lessinia su due ruote con le nostre e-bike di ultima generazione.
@@ -19,7 +19,17 @@ const currentYear = new Date().getFullYear();
         
         <div class="footer-socials">
           <a href="https://www.instagram.com/sambobikerent/" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Seguici su Instagram">
-            <i class="fa-brands fa-instagram"></i>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 448 512" 
+              class="social-svg"
+              aria-hidden="true"
+            >
+              <path 
+                fill="currentColor" 
+                d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+              />
+            </svg>
           </a>
         </div>
       </div>
@@ -67,11 +77,11 @@ const currentYear = new Date().getFullYear();
      ========================================== */
   .main-footer {
     width: 100%;
-    background-color: #111111; /* Stesso nero fumo di Contatti.astro */
+    background-color: #111111;
     color: #ffffff;
     padding: 80px 40px 40px 40px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Separatore quasi invisibile */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
     z-index: 10;
   }
@@ -106,17 +116,18 @@ const currentYear = new Date().getFullYear();
   .footer-logo-img {
     width: 100%;
     height: auto;
+    display: block;
     object-fit: contain;
   }
 
   .footer-tagline {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #888888; /* Grigio tech smorzato */
-    margin: 0 0 25px 0; /* Aggiunto margine per staccare i social */
+    color: #888888;
+    margin: 0 0 25px 0;
   }
 
-  /* STYLE PULITO ED ELEGANTE PER I SOCIAL */
+  /* CONTENITORE BOTTONI SOCIAL */
   .footer-socials {
     display: flex;
     gap: 15px;
@@ -126,23 +137,34 @@ const currentYear = new Date().getFullYear();
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.03);
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 50%;
-    color: #aaaaaa;
-    font-size: 1.1rem;
+    color: #888888; /* Partenza grigio discreto */
     text-decoration: none;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* RE-PROPORZIONAMENTO LOGO INSTAGRAM (Più piccolo ed elegante) */
+  .social-svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* NUOVO EFFETTO HOVER CONTENUTO ED ELEGANTE */
   .social-icon-link:hover {
-    color: #111111;
-    background: #dbff9b; /* Si accende col verde acido del brand */
-    border-color: #dbff9b;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(219, 255, 155, 0.15);
+    color: #ffffff; /* L'icona diventa bianca nitida */
+    background: rgba(255, 255, 255, 0.05); /* Sfondo impercettibilmente più chiaro */
+    border-color: rgba(255, 255, 255, 0.25); /* Il bordo reagisce in bianco morbido */
+    transform: translateY(-2px); /* Micro lift naturale */
+  }
+
+  .social-icon-link:hover .social-svg {
+    transform: scale(1.05); /* Leggerissimo zoom dell'icona interna */
   }
 
   .footer-nav-grid {
@@ -155,7 +177,7 @@ const currentYear = new Date().getFullYear();
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
-    color: #dbff9b; /* Verde acido tech */
+    color: #dbff9b; /* Verde acido tech del brand */
     margin: 0 0 24px 0;
   }
 
@@ -180,7 +202,7 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer-nav-col ul a:hover {
-    color: #ffffff; /* Sbianca al passaggio */
+    color: #ffffff;
   }
 
   .footer-nav-col span {

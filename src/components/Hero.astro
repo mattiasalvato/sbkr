@@ -1,11 +1,12 @@
 ---
 // Hero.astro
+import { Image } from 'astro:assets';
 import heroBgImage from '../images/hero-background.jpg'; // Controlla se .jpg o .JPG
 ---
 
 <header class="hero-container" id="home">
   <div class="hero-bg" id="heroBg">
-    <img src={heroBgImage.src} alt="Esplora in bicicletta" />
+    <Image src={heroBgImage} alt="Esplora in bicicletta" format="webp" />
     <div class="overlay"></div>
   </div>
 

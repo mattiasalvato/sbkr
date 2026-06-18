@@ -6,6 +6,7 @@ import aboutBike3 from '../images/about-bike-3.webp';
 import uomoebiketrekking from '../images/uomo-ebike-trekking.jpg';
 import uomoebikesambo from '../images/uomo-ebike-san-bonifacio.webp';
 import uomoebikenatura from '../images/uomo-ebike-natura.webp';
+import { Image } from 'astro:assets';
 ---
 
 <div class="about-scroll-trigger" id="about">
@@ -43,7 +44,7 @@ import uomoebikenatura from '../images/uomo-ebike-natura.webp';
 
       <div class="image-block-one-bleed parallax-element reveal-image" data-speed="-0.06">
         <div class="image-wrapper-bleed ken-burns tilt-target">
-          <img src={uomoebiketrekking.src} alt="Dettaglio e-bike pronta all'avventura" class="interactive-img" />
+          <Image src={uomoebiketrekking} alt="Dettaglio e-bike pronta all'avventura" class="interactive-img" format="webp" />
         </div>
       </div>
     </div>
@@ -51,7 +52,7 @@ import uomoebikenatura from '../images/uomo-ebike-natura.webp';
     <div class="container lower-grid">
       <div class="image-block-two parallax-element reveal-image" data-speed="0.05">
         <div class="image-wrapper ken-burns tilt-target">
-          <img src={uomoebikesambo.src} alt="Ciclista sui sentieri" class="interactive-img" />
+          <Image src={uomoebikesambo} alt="Ciclista sui sentieri" class="interactive-img" format="webp" />
         </div>
       </div>
       <div class="third-text parallax-element reveal-text" data-speed="-0.02">
@@ -70,7 +71,7 @@ import uomoebikenatura from '../images/uomo-ebike-natura.webp';
       </div>
       <div class="image-block-three parallax-element reveal-image" data-speed="-0.05">
         <div class="image-wrapper ken-burns tilt-target">
-          <img src={uomoebikenatura.src} alt="Trekking sui sentieri" class="interactive-img" />
+          <Image src={uomoebikenatura} alt="Trekking sui sentieri" class="interactive-img" format="webp" />
         </div>
       </div>
     </div>
