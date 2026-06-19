@@ -1,8 +1,6 @@
 ---
 // About.astro
-import aboutBike1 from '../images/about-bike-1.webp';
-import aboutBike2 from '../images/about-bike-2.webp';
-import aboutBike3 from '../images/about-bike-3.webp';
+
 import uomoebiketrekking from '../images/uomo-ebike-trekking.jpg';
 import uomoebikesambo from '../images/uomo-ebike-san-bonifacio.webp';
 import uomoebikenatura from '../images/uomo-ebike-natura.webp';
@@ -31,15 +29,14 @@ import { Image } from 'astro:assets';
     <div class="grid-layout-bleed align-top">
       <div class="text-block parallax-element reveal-text" data-speed="0.02">
         <h2 class="main-heading">
-          Le nostre e-bike sono lo strumento definitivo per explorar il territorio, dove la tecnologia incontra la natura.
+          Esplorazione senza limiti: Sambo Bike Rent unisce avventura e natura
         </h2>
         
         <div class="secondary-text">
           <p>
-            Coniugando potenza, autonomia e comfort, offriamo un modo ecologico e dinamico per scoprire le meraviglie paesaggistiche e culturali della nostra zona. Che tu sia un ciclista esperto o un semplice appassionato, le nostre biciclette elettriche ti porteranno ovunque.
-          </p>
+            Progettiamo esperienze su due ruote dove performance e natura si fondono. Grazie a e-bike dotate di grande autonomia e comfort superiore, proponiamo un modo ecologico e attivo per scoprire le meraviglie paesaggistiche e storiche della nostra zona.
+          </p> 
         </div>
-
       </div>
 
       <div class="image-block-one-bleed parallax-element reveal-image" data-speed="-0.06">
@@ -52,26 +49,29 @@ import { Image } from 'astro:assets';
     <div class="container lower-grid">
       <div class="image-block-two parallax-element reveal-image" data-speed="0.05">
         <div class="image-wrapper ken-burns tilt-target">
-          <Image src={uomoebikesambo} alt="Ciclista sui sentieri" class="interactive-img" format="webp" />
+          <Image src={uomoebikesambo} alt="Ciclista sui sentieri tra San Bonifacio e Soave" class="interactive-img" format="webp" />
         </div>
       </div>
       <div class="third-text parallax-element reveal-text" data-speed="-0.02">
+        <!-- VALORE SEO: Introdotto l'H3 per evidenziare le mete geografiche principali -->
+        <h3>Dai vigneti di Soave alla Lessinia</h3>
         <p>
-          Dai vigneti storici di Soave fino ai sentieri più suggestivi della Lessinia: scopri la provincia di Verona da una nuova prospettiva, senza l'ansia delle salite ripide.
+          Esplora la provincia di Verona da una nuova prospettiva, affrontando ogni pendenza con il sorriso e scoprendo i sentieri più panoramici del territorio.
         </p>
       </div>
     </div>
 
     <div class="container lower-grid">
       <div class="fourth-text parallax-element reveal-text" data-speed="0.03">
+        <!-- VALORE SEO: Introdotto l'H3 per intercettare le query sulle e-bike della flotta -->
+        <h3>Una flotta e-bike configurata per te</h3>
         <p>
-          Respira l'aria aperta e connettiti con i paesaggi locali. Le nostre e-bike ti permettono di raggiungere mete panoramiche straordinarie mantenendo il pieno controllo della fatica.
-          Abbiamo progettato un'esperienza di cicloturismo che unisce l'avventura alla comodità, rendendo ogni uscita un ricordo indimenticabile. Che tu stia cercando una gita rilassante o una sfida più impegnativa, le nostre biciclette elettriche sono pronte a portarti ovunque tu voglia andare.
+          Raggiungi mete straordinarie gestendo l'assistenza del motore in base alla tua voglia di sfidarti. Che tu stia cercando una gita rilassante tra le corti della Val d'Alpone o un'avventura più impegnativa in quota, siamo pronti a portarti ovunque. Senza compromessi, in totale sicurezza.
         </p>
       </div>
       <div class="image-block-three parallax-element reveal-image" data-speed="-0.05">
         <div class="image-wrapper ken-burns tilt-target">
-          <Image src={uomoebikenatura} alt="Trekking sui sentieri" class="interactive-img" format="webp" />
+          <Image src={uomoebikenatura} alt="Trekking in e-bike nella natura della Lessinia" class="interactive-img" format="webp" />
         </div>
       </div>
     </div>
@@ -307,6 +307,14 @@ import { Image } from 'astro:assets';
     padding-top: 80px;
     padding-left: 150px;
   }
+
+  .third-text h3, .fourth-text h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
 
   /* Scroll Down Indicator */
   .scroll-down-indicator {

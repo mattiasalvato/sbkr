@@ -12,7 +12,8 @@ import heroBgImage from '../images/hero-background.jpg'; // Controlla se .jpg o 
 
   <div class="hero-content" id="heroContent">
     <p class="hero-subtitle">
-      <span class="char-reveal">Esplora il territorio su due ruote</span>
+      <span class="char-reveal brand-name">Sambo Bike Rent</span>
+      <span class="char-reveal brand-tagline">Noleggio E-Bike a San Bonifacio</span>
     </p>
     
     <h1 class="hero-title">
@@ -32,7 +33,7 @@ import heroBgImage from '../images/hero-background.jpg'; // Controlla se .jpg o 
   </div>
 
   <div class="scroll-down-wrapper">
-    <span class="handwritten-scroll">Scroll to see full collection</span>
+    <span class="handwritten-scroll">Inizia l'esplorazione</span>
     <svg class="scroll-arrow" width="20" height="30" viewBox="0 0 24 40" fill="none">
       <path d="M12,5 V35 M5,28 L12,35 L19,28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
@@ -194,13 +195,28 @@ import heroBgImage from '../images/hero-background.jpg'; // Controlla se .jpg o 
      TYPOGRAPHY & EFFETTO LUMINOSO ELEGANTE
      ========================================== */
   .hero-subtitle {
-    font-size: clamp(0.85rem, 1.8vw, 1rem);
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-bottom: 2rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Spazio controllato tra le due righe senza usare il BR */
+  margin-bottom: 2.5rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.hero-subtitle .brand-name {
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: #dbff9b; /* Il tuo verde acido per far risaltare subito il brand */
+  font-weight: 700;
+}
+
+.hero-subtitle .brand-tagline {
+  font-size: clamp(0.75rem, 2vw, 1.15rem); /* Leggermente più grande per dare leggibilità alla località */
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
 
   .hero-title {
     font-family: 'Plus Jakarta Sans', sans-serif ;
@@ -372,6 +388,19 @@ import heroBgImage from '../images/hero-background.jpg'; // Controlla se .jpg o 
     .handwritten-scroll { 
       font-size: 1.15rem; 
     }
+    .hero-subtitle {
+      gap: 6px;
+      margin-bottom: 2rem;
+      align-items: center; /* Centra l'allineamento se la tua Hero su mobile è centrata */
+      text-align: center;
+    }
+    .hero-subtitle .brand-name {
+      letter-spacing: 4px;
+    }
+    .hero-subtitle .brand-tagline {
+      letter-spacing: 2px;
+    }
+
   }
 
   @media (max-width: 380px) {

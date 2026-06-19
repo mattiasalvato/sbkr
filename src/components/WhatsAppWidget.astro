@@ -2,7 +2,7 @@
 // src/components/WhatsAppWidget.astro
 
 // Inserisci il numero di telefono (senza il + davanti, comprensivo di prefisso internazionale 39)
-const phoneNumber = "393711889651";
+const phoneNumber = "393517945198";
 // Messaggio preimpostato che ti arriverà quando l'utente clicca
 const defaultMessage = encodeURIComponent("Ciao! Vorrei avere delle informazioni riguardo al noleggio delle e-bike...");
 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${defaultMessage}`;
@@ -16,7 +16,6 @@ const whatsappUrl = `https://wa.me/${phoneNumber}?text=${defaultMessage}`;
   aria-label="Contattaci su WhatsApp"
 >
   <div class="whatsapp-icon-wrapper">
-    <!-- SVG NATIVO OTTIMIZZATO: Eredita dinamicamente il colore tramite currentColor -->
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
       viewBox="0 0 448 512" 
