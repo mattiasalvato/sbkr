@@ -1,0 +1,317 @@
+---
+// src/pages/promozione.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import furgoneComboImg from '../images/furgone-ebikes-combo.png'; // Assicurati che l'immagine sia in questa cartella
+import { Image } from 'astro:assets';
+---
+
+<Layout title="Promozione Tutto Incluso: Furgone 9 Posti + E-Bikes | Sambo Bike Rent">
+
+  <main class="promo-page-wrapper">
+    <section class="promo-section">
+      <div class="promo-container">
+        
+        <!-- TESTATA A TUTTO WIDTH (Sopra la Grid) -->
+        <div class="promo-header-full">
+          <p class="brand-badge">Sambo Bike Rent</p>
+          <h1 class="promo-main-title">PROMOZIONE: Tutto Incluso</h1>
+        </div>
+
+        <!-- LA GRID: Allineata in alto per una perfetta corrispondenza orizzontale -->
+        <div class="promo-grid">
+          
+          <!-- LATO SINISTRO: Card Immagine con sfondo Verde Brand -->
+          <div class="promo-image-block">
+            <div class="image-bg-card">
+              <Image 
+                src={furgoneComboImg} 
+                alt="Furgone Citroen 9 posti con gancio traino e portabici Thule carico di e-bike" 
+                class="promo-img"
+                format="webp"
+                width={1920}
+                height={1080}
+                loading="eager" 
+              />
+            </div>
+          </div>
+
+          <!-- LATO DESTRO: Contenuti e dettagli informativi -->
+          <div class="promo-info-block">
+            <h2 class="sub-heading-promo">Furgone 9 Posti + E-Bikes</h2>
+            
+            <p class="promo-description">
+              Noleggia il nostro furgone <strong>Citroen 9 posti insieme alle e-bikes</strong>. Abbiamo già il <strong>gancio traino</strong> e il <strong>portabici montato</strong>: non devi pensare a nulla.
+            </p>
+
+            <!-- Banner Vacanza Stile Brochure -->
+            <div class="vacation-banner">
+              <p>NOLEGGIA FURGONE + E-BIKES ANCHE PER ANDARE IN VACANZA</p>
+            </div>
+
+            <!-- Elenco Caratteristiche Strutturato (Ottimo per SEO e Lettura) -->
+            <div class="features-list">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <!-- SVG Furgone Consegna -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h11v11M17 9h4l3 3v4a2 2 0 0 1-2 2h-1" /><path d="M17 9v4h6" /><circle cx="6.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+                </div>
+                <div class="feature-text">
+                  <h3>Tutto pronto</h3>
+                  <p>Furgone 9 posti con gancio traino e portabici già montati.</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <!-- SVG Fulmine Elettrico -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <div class="feature-text">
+                  <h3>E-Bikes incluse</h3>
+                  <p>Biciclette elettriche di ultima generazione caricate e pronte all'uso.</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <!-- SVG Cuore/Ideale -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+                <div class="feature-text">
+                  <h3>Ideale per</h3>
+                  <p>Vacanze in famiglia, weekend con gli amici, trasferte sportive e cicloescursioni.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pulsante di Conversione Diretto a Tally -->
+            <div class="cta-container">
+              <a href="/#contatti" class="btn-promo-cta">Richiedi un Preventivo Gratuito</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+</Layout>
+
+<style>
+  /* ==========================================
+     STRUTTURA GENERALE ED ESTETICA SCURA
+     ========================================== */
+  .promo-page-wrapper {
+    width: 100%;
+    background-color: #111111;
+    color: #ffffff;
+    padding-top: 120px; /* Evita sovrapposizioni con l'header fixed */
+  }
+
+  .promo-section {
+    padding: 100px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    box-sizing: border-box;
+  }
+
+  .promo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  /* ==========================================
+     TESTATA A TUTTO WIDTH
+     ========================================== */
+  .promo-header-full {
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 30px;
+  }
+
+  .brand-badge {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #dbff9b;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .promo-main-title {
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  /* ==========================================
+     GRID: ALLINEAMENTO IN ALTO DI PRECISIONE
+     ========================================== */
+  .promo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 80px;
+    align-items: flex-start; /* Consente l'allineamento orizzontale di foto e scritte */
+  }
+
+  .promo-image-block {
+    width: 100%;
+  }
+
+  .image-bg-card {
+    background-color: #b8db87; /* Sfondo verde ripreso dalla brochure */
+    border-radius: 40px;
+    padding: 50px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .promo-img {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: contain;
+  }
+
+  /* INFO BLOCK DESTRO */
+  .promo-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: 5px; /* Compensa la linea invisibile dell'altezza del font del titolo */
+  }
+
+  .sub-heading-promo {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .promo-description {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: #aaaaaa;
+    margin: 0;
+  }
+
+  .promo-description strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* BANNER BROCHURE NERO */
+  .vacation-banner {
+    background-color: #161616;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 20px 24px;
+    border-radius: 14px;
+    box-sizing: border-box;
+  }
+
+  .vacation-banner p {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #dbff9b;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* ELEMENTI DELLA LISTA FEATURES */
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dbff9b;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .feature-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .feature-text h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+  }
+
+  .feature-text p {
+    font-size: 1rem;
+    color: #888888;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* BOTTONE CALL TO ACTION FINALER */
+  .btn-promo-cta {
+    display: inline-block;
+    background-color: #dbff9b;
+    color: #111111;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(219, 255, 155, 0.15);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-promo-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(219, 255, 155, 0.3);
+    background-color: #e5ffb3;
+  }
+
+  /* ==========================================
+     MEDIA QUERIES (RESPONSIVE DI PRECISIONE)
+     ========================================== */
+  @media (max-width: 1024px) {
+    .promo-header-full { text-align: center; margin-bottom: 40px; }
+    .promo-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 768px) {
+    .promo-section { padding: 60px 20px; }
+    .image-bg-card { padding: 24px; border-radius: 24px; }
+    .btn-promo-cta { display: block; text-align: center; }
+  }
+</style>
