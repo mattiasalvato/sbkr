@@ -1,0 +1,309 @@
+---
+// src/components/Convenienza.astro
+---
+
+<section class="convenienza-section" id="convenienza">
+  <div class="container-convenienza">
+    
+    <!-- Intestazione Sezione -->
+    <div class="convenienza-header">
+      <p class="section-badge">Scelta Intelligente</p>
+      <h2 class="convenienza-title">Acquisto vs Noleggio:<br/><span class="highlight">Quanto ti costa davvero?</span></h2>
+      <p class="convenienza-subtitle">
+        Se usi la bicicletta solo nei weekend, per qualche gita fuori porta o durante le vacanze, l'acquisto di una e-bike top di gamma si trasforma spesso in una spesa passiva. Ecco i conti reali.
+      </p>
+    </div>
+
+    <!-- Grid Principale: Tabella vs Testo -->
+    <div class="convenienza-grid">
+      
+      <!-- LATO SINISTRO: Tabella dei Costi Reali -->
+      <div class="table-container">
+        <table class="convenienza-table">
+          <thead>
+            <tr>
+              <th>Costi stimati su 3 anni</th>
+              <th>Acquistare</th>
+              <th>Noleggiare con Sambo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cost-label">Prezzo E-Bike Premium</td>
+              <td class="cost-buy">€ 4.500 - € 6.000</td>
+              <td class="cost-rent">da € 25</td>
+            </tr>
+            <tr>
+              <td class="cost-label">Manutenzione e Usura <small>(Freni, catena, software)</small></td>
+              <td class="cost-buy">€ 150 / anno</td>
+              <td class="cost-rent">Inclusa</td>
+            </tr>
+            <tr>
+              <td class="cost-label">Decadimento della Batteria <small>(Sostituzione dopo 3 anni)</small></td>
+              <td class="cost-buy">€ 600 - € 800</td>
+              <td class="cost-rent">Sempre al 100%</td>
+            </tr>
+            <tr>
+              <td class="cost-label">Accessori obbligatori <small>(Casco, portabici, lucchetto)</small></td>
+              <td class="cost-buy">€ 250</td>
+              <td class="cost-rent">Inclusi</td>
+            </tr>
+            <tr class="total-row">
+              <td class="cost-label">Svalutazione del mezzo <small>(Dopo 3 anni)</small></td>
+              <td class="cost-buy">- 50% del valore</td>
+              <td class="cost-rent">Nessun rischio</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- LATO DESTRO: Le 3 Grandi Verità (I punti di dolore) -->
+      <div class="convenienza-reasons">
+        
+        <div class="reason-card">
+          <div class="reason-num">01</div>
+          <div class="reason-content">
+            <h3>Nessun costo fisso di manutenzione</h3>
+            <p>Una e-bike ferma in garage invecchia, i liquidi dei freni degradano e la batteria perde capacità. Con il noleggio paghi solo i giorni in cui pedali davvero, con la certezza di avere un mezzo perfettamente revisionato.</p>
+          </div>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">02</div>
+          <div class="reason-content">
+            <h3>Tecnologia sempre aggiornata</h3>
+            <p>I motori elettrici e i software evolvono ogni anno. Acquistando oggi, ti ritroverai un mezzo obsoleto tra tre anni. Noleggiando con noi, sali a bordo solo di modelli di ultima generazione senza subire la svalutazione del mercato.</p>
+          </div>
+        </div>
+
+        <div class="reason-card">
+          <div class="reason-num">03</div>
+          <div class="reason-content">
+            <h3>Zero pensieri di logistica</h3>
+            <p>Niente lavaggi post-fango, niente acquisto di portabici da auto o lucchetti costosi, zero ansia da furto in garage. Ritiri la bici pronta all'avventura e ce la riconsegni a fine giornata. Al resto ci pensiamo noi.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Box Riassuntivo di Chiusura -->
+    <div class="convenienza-conclusion">
+      <p>Se utilizzi la e-bike <strong>meno di 20 volte</strong> all'anno, il noleggio ti fa risparmiare fino al <strong>75%</strong> rispetto ai costi totali di proprietà. <strong>Fai la scelta più intelligente</strong>.</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .convenienza-section {
+    width: 100%;
+    background-color: #1D1D1D; /* Sfondo leggermente rialzato rispetto al nero fumo di fondo */
+    color: #ffffff;
+    padding: 140px 62px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    position: relative;
+    z-index: 10;
+  }
+
+  .container-convenienza {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  /* INTRO */
+  .convenienza-header {
+    max-width: 750px;
+  }
+
+  .section-badge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #dbff9b;
+    padding: 6px 14px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 25px;
+  }
+
+  .convenienza-title {
+    font-size: clamp(2.3rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.03em;
+  }
+
+  .highlight {
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .convenienza-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #888888;
+    margin: 0;
+  }
+
+  /* GRID */
+  .convenienza-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: flex-start;
+  }
+
+  /* TABELLA COMPARATIVA */
+  .table-container {
+    width: 100%;
+    background: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+  }
+
+  .convenienza-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .convenienza-table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666666;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .convenienza-table th:nth-child(2), .convenienza-table td:nth-child(2) {
+    text-align: center;
+  }
+
+  .convenienza-table th:nth-child(3), .convenienza-table td:nth-child(3) {
+    text-align: right;
+    color: #dbff9b;
+  }
+
+  .convenienza-table td {
+    padding: 20px 0;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .cost-label {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .cost-label small {
+    display: block;
+    font-size: 0.8rem;
+    color: #555555;
+    margin-top: 2px;
+  }
+
+  .cost-buy {
+    color: #aaaaaa;
+  }
+
+  .total-row td {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  /* LE MOTIVAZIONI A DESTRA */
+  .convenienza-reasons {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .reason-card {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+  }
+
+  .reason-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #dbff9b;
+    background: rgba(219, 255, 155, 0.03);
+    border: 1px solid rgba(219, 255, 155, 0.1);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .reason-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .reason-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #888888;
+    margin: 0;
+  }
+
+  /* SCATOLA DEL VERDETTO FINALE */
+  .convenienza-conclusion {
+    border: none;
+    padding: 24px 30px;
+    border-radius: 16px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .convenienza-conclusion p {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #aaaaaa;
+    line-height: 1.5;
+  }
+
+  .convenienza-conclusion strong {
+    color: #dbff9b;
+  }
+
+  /* ==========================================
+     RESPONSIVE DESIGN
+     ========================================== */
+  @media (max-width: 1024px) {
+    .convenienza-section { padding: 100px 32px; }
+    .convenienza-grid { grid-template-columns: 1fr; gap: 50px; }
+    .table-container { padding: 24px; }
+  }
+
+  @media (max-width: 768px) {
+    .convenienza-section { padding: 80px 20px; }
+    .convenienza-title { font-size: 2.2rem; }
+    .convenienza-grid { gap: 40px; }
+    .convenienza-table th, .convenienza-table td { font-size: 0.9rem; padding: 16px 0; }
+    .cost-label small { display: none; } /* Allegerisce la tabella sui piccoli schermi */
+    .reason-card { gap: 15px; }
+    .reason-num { width: 40px; height: 40px; font-size: 1.2rem; }
+    .convenienza-conclusion p { font-size: 0.95rem; }
+  }
+</style>
