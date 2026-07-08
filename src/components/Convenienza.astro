@@ -5,7 +5,6 @@
 <section class="convenienza-section" id="convenienza">
   <div class="container-convenienza">
     
-    <!-- Intestazione Sezione -->
     <div class="convenienza-header">
       <p class="section-badge">Scelta Intelligente</p>
       <h2 class="convenienza-title">Acquisto vs Noleggio:<br/><span class="highlight">Quanto ti costa davvero?</span></h2>
@@ -14,10 +13,8 @@
       </p>
     </div>
 
-    <!-- Grid Principale: Tabella vs Testo -->
     <div class="convenienza-grid">
       
-      <!-- LATO SINISTRO: Tabella dei Costi Reali con Scroll Responsive -->
       <div class="table-container">
         <div class="table-responsive-wrapper">
           <table class="convenienza-table">
@@ -59,14 +56,13 @@
         </div>
       </div>
 
-      <!-- LATO DESTRO: Le 3 Grandi Verità -->
       <div class="convenienza-reasons">
         
         <div class="reason-card">
           <div class="reason-num">01</div>
           <div class="reason-content">
             <h3>Nessun costo fisso di manutenzione</h3>
-            <p>Una e-bike ferma in garage invecchia, i liquidi dei freni degradano e la batteria perde capacità. Con il noleggio paghi solo i giorni in cui pedali davvero, con la certezza di avere un mezzo perfettamente revisionato.</p>
+            <p>Una e-bike ferma in garage invecchia, i liquidi dei freni degradano e la batteria perde capacità. Con il noleggio paghi solo i giorni in cui pedali davvero, con la certezza di avere un mezzo pfetto revisionato.</p>
           </div>
         </div>
 
@@ -90,9 +86,8 @@
 
     </div>
 
-    <!-- Box Riassuntivo di Chiusura -->
     <div class="convenienza-conclusion">
-      <p>Se utilizzi la e-bike <strong>meno di 20 volte</strong> all'anno, il noleggio ti fa risparmiare fino al <strong>75%</strong> rispetto ai costi totali di proprietà. <strong>Fai la scelta più intelligente</strong>.</p>
+      <p>Se utilizzi la e-bike <strong>meno di 20 volte</strong> all'anno, il noleggio ti fa risparmiare fino al <strong>75%</strong> rispetto dei costi totali di proprietà. <strong>Fai la scelta più intelligente</strong>.</p>
     </div>
 
   </div>
@@ -178,14 +173,14 @@
     box-sizing: border-box;
   }
 
-  /* WRAPPER ATTIVO PER LO SCROLL SU SCHERMI PICCOLI */
+  /* WRAPPER PER LO SCROLL ORIZZONTALE */
   .table-responsive-wrapper {
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Momentum scroll liscio su iOS */
+    -webkit-overflow-scrolling: touch; /* Momentum scroll nativo su iOS */
   }
 
-  /* Nasconde la barra di scorrimento brutta su Chrome/Safari/Firefox mantenendo lo scroll funzionante */
+  /* Nasconde la scrollbar estetica mantenendo l'esperienza fluida */
   .table-responsive-wrapper::-webkit-scrollbar {
     display: none;
   }
@@ -332,18 +327,39 @@
       border-radius: 20px;
     }
 
-    /* ALLINEAMENTO TABELLA SCROLLABILE SU MOBILE */
+    /* FIX SCROLL ORIZZONTALE NATIVO: Impone una larghezza minima strutturata */
     .convenienza-table {
-      min-width: 580px; /* Impone una larghezza minima strutturata per attivare lo scroll senza schiacciare i testi */
+      display: table !important; /* Forza il comportamento tabellare nativo */
+      width: 100% !important;
+      min-width: 580px; /* Impedisce il collasso dei testi creando lo spazio di scroll */
+    }
+
+    .convenienza-table thead {
+      display: table-header-group !important;
+    }
+
+    .convenienza-table tr {
+      display: table-row !important;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
     }
 
     .convenienza-table th, .convenienza-table td { 
+      display: table-cell !important;
       font-size: 0.9rem; 
-      padding: 16px 8px; /* Aggiunto padding orizzontale interno di sicurezza per lo scroll */
+      padding: 16px 10px; /* Padding interno bilanciato per la vista a scorrimento */
     }
 
-    .convenienza-table td small {
-      font-size: 0.75rem;
+    .convenienza-table td::before {
+      display: none !important; /* Rimuove le vecchie etichette verticali mobile obsolete */
+    }
+
+    .convenienza-table .cost-label {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+      padding-bottom: 16px !important;
+      margin-bottom: 0 !important;
+      font-size: 0.95rem !important;
     }
     
     .reason-card { gap: 16px; }
