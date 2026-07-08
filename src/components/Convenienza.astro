@@ -5,6 +5,7 @@
 <section class="convenienza-section" id="convenienza">
   <div class="container-convenienza">
     
+    <!-- Intestazione Sezione -->
     <div class="convenienza-header">
       <p class="section-badge">Scelta Intelligente</p>
       <h2 class="convenienza-title">Acquisto vs Noleggio:<br/><span class="highlight">Quanto ti costa davvero?</span></h2>
@@ -13,8 +14,10 @@
       </p>
     </div>
 
+    <!-- Grid Principale: Tabella vs Testo -->
     <div class="convenienza-grid">
       
+      <!-- LATO SINISTRO: Tabella dei Costi Reali con Wrapper per lo Scroll -->
       <div class="table-container">
         <div class="table-responsive-wrapper">
           <table class="convenienza-table">
@@ -56,13 +59,14 @@
         </div>
       </div>
 
+      <!-- LATO DESTRO: Le 3 Grandi Verità -->
       <div class="convenienza-reasons">
         
         <div class="reason-card">
           <div class="reason-num">01</div>
           <div class="reason-content">
             <h3>Nessun costo fisso di manutenzione</h3>
-            <p>Una e-bike ferma in garage invecchia, i liquidi dei freni degradano e la batteria perde capacità. Con il noleggio paghi solo i giorni in cui pedali davvero, con la certezza di avere un mezzo pfetto revisionato.</p>
+            <p>Una e-bike ferma in garage invecchia, i liquidi dei freni degradano e la batteria perde capacità. Con il noleggio paghi solo i giorni in cui pedali davvero, con la certezza di avere un mezzo perfettamente revisionato.</p>
           </div>
         </div>
 
@@ -86,6 +90,7 @@
 
     </div>
 
+    <!-- Box Riassuntivo di Chiusura -->
     <div class="convenienza-conclusion">
       <p>Se utilizzi la e-bike <strong>meno di 20 volte</strong> all'anno, il noleggio ti fa risparmiare fino al <strong>75%</strong> rispetto dei costi totali di proprietà. <strong>Fai la scelta più intelligente</strong>.</p>
     </div>
@@ -125,10 +130,6 @@
     font-weight: 700;
     letter-spacing: 2px;
     color: #dbff9b;
-    border: 1px solid rgba(219, 255, 155, 0.15);
-    background: rgba(219, 255, 155, 0.02);
-    padding: 6px 14px;
-    border-radius: 50px;
     display: inline-block;
     margin-bottom: 25px;
   }
@@ -162,7 +163,7 @@
     align-items: flex-start;
   }
 
-  /* TABELLA COMPARATIVA */
+  /* TABELLA COMPARATIVA (DESKTOP) */
   .table-container {
     width: 100%;
     background: #111111;
@@ -177,10 +178,12 @@
   .table-responsive-wrapper {
     width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
+    display: block;
     -webkit-overflow-scrolling: touch; /* Momentum scroll nativo su iOS */
   }
 
-  /* Nasconde la scrollbar estetica mantenendo l'esperienza fluida */
+  /* Nasconde la barra di scorrimento sui diversi browser */
   .table-responsive-wrapper::-webkit-scrollbar {
     display: none;
   }
@@ -285,9 +288,7 @@
 
   /* SCATOLA DEL VERDETTO FINALE */
   .convenienza-conclusion {
-    background: rgba(219, 255, 155, 0.02);
-    border: 1px solid rgba(219, 255, 155, 0.08);
-    padding: 24px 30px;
+    
     border-radius: 16px;
     max-width: 100%;
     box-sizing: border-box;
@@ -304,8 +305,8 @@
     color: #dbff9b;
   }
 
-  /* ==========================================
-     MEDIA QUERIES (RESPONSIVE DI PRECISIONE)
+ /* ==========================================
+     MEDIA QUERIES (SOSTITUISCI INTERAMENTE)
      ========================================== */
   @media (max-width: 1200px) {
     .convenienza-grid { gap: 40px; }
@@ -318,20 +319,47 @@
   }
 
   @media (max-width: 768px) {
-    .convenienza-section { padding: 80px 20px; }
-    .convenienza-title { font-size: 2.2rem; }
-    .convenienza-grid { gap: 48px; }
+    .convenienza-section { 
+      padding: 80px 20px; 
+    }
     
+    .convenienza-title { 
+      font-size: 2.2rem; 
+    }
+    
+    .convenienza-grid { 
+      gap: 48px; 
+      width: 100%;
+    }
+    
+    /* 1. CONTENITORE PRINCIPALE DELLA CARD (BLOCCATO AL 100% DELLO SCHERMO) */
     .table-container {
-      padding: 20px;
+      padding: 24px 0px !important; /* Rimuove i padding laterali per non stringere la tabella */
       border-radius: 20px;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow: hidden !important; /* Impedisce alla card stessa di allargarsi */
+      box-sizing: border-box;
     }
 
-    /* FIX SCROLL ORIZZONTALE NATIVO: Impone una larghezza minima strutturata */
-    .convenienza-table {
-      display: table !important; /* Forza il comportamento tabellare nativo */
+    /* 2. IL WRAPPER CHE SBLOCCA LO SCROLL ORIZZONTALE */
+    .table-responsive-wrapper {
       width: 100% !important;
-      min-width: 580px; /* Impedisce il collasso dei testi creando lo spazio di scroll */
+      max-width: 100% !important;
+      overflow-x: auto !important; /* Forza la comparsa dello scroll orizzontale */
+      overflow-y: hidden !important;
+      display: block !important;
+      padding: 0 20px !important; /* Crea il margine interno per far respirare i testi prima dello scroll */
+      box-sizing: border-box;
+      -webkit-overflow-scrolling: touch; /* Rende lo swipe fluido su iPhone/iOS */
+    }
+
+    /* 3. LA TABELLA INTERNA (FORZATA A SUPERARE LA LARGHEZZA DELLO SCHERMO) */
+    .convenienza-table {
+      display: table !important; 
+      width: 100% !important;
+      min-width: 640px !important; /* Spinge la terza colonna oltre lo schermo per attivare lo scroll */
+      border-collapse: collapse !important;
     }
 
     .convenienza-table thead {
@@ -340,25 +368,24 @@
 
     .convenienza-table tr {
       display: table-row !important;
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
     }
 
-    .convenienza-table th, .convenienza-table td { 
+    .convenienza-table th, 
+    .convenienza-table td { 
       display: table-cell !important;
-      font-size: 0.9rem; 
-      padding: 16px 10px; /* Padding interno bilanciato per la vista a scorrimento */
+      font-size: 0.9rem !important; 
+      padding: 16px 12px !important; 
+      white-space: nowrap !important; /* Evita che i prezzi vadano a capo orizzontalmente */
     }
 
-    .convenienza-table td::before {
-      display: none !important; /* Rimuove le vecchie etichette verticali mobile obsolete */
+    /* Consente solo alla colonna descrittiva di andare a capo per salvare spazio */
+    .convenienza-table td.cost-label {
+      white-space: normal !important; 
+      min-width: 220px !important;
     }
 
     .convenienza-table .cost-label {
       border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-      padding-bottom: 16px !important;
-      margin-bottom: 0 !important;
       font-size: 0.95rem !important;
     }
     
