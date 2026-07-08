@@ -17,47 +17,49 @@
     <!-- Grid Principale: Tabella vs Testo -->
     <div class="convenienza-grid">
       
-      <!-- LATO SINISTRO: Tabella dei Costi Reali -->
+      <!-- LATO SINISTRO: Tabella dei Costi Reali con Scroll Responsive -->
       <div class="table-container">
-        <table class="convenienza-table">
-          <thead>
-            <tr>
-              <th>Costi stimati su 3 anni</th>
-              <th>Acquistare</th>
-              <th>Noleggiare con Sambo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="cost-label">Prezzo E-Bike Premium</td>
-              <td class="cost-buy">€ 4.500 - € 6.000</td>
-              <td class="cost-rent">da € 25</td>
-            </tr>
-            <tr>
-              <td class="cost-label">Manutenzione e Usura <small>(Freni, catena, software)</small></td>
-              <td class="cost-buy">€ 150 / anno</td>
-              <td class="cost-rent">Inclusa</td>
-            </tr>
-            <tr>
-              <td class="cost-label">Decadimento della Batteria <small>(Sostituzione dopo 3 anni)</small></td>
-              <td class="cost-buy">€ 600 - € 800</td>
-              <td class="cost-rent">Sempre al 100%</td>
-            </tr>
-            <tr>
-              <td class="cost-label">Accessori obbligatori <small>(Casco, portabici, lucchetto)</small></td>
-              <td class="cost-buy">€ 250</td>
-              <td class="cost-rent">Inclusi</td>
-            </tr>
-            <tr class="total-row">
-              <td class="cost-label">Svalutazione del mezzo <small>(Dopo 3 anni)</small></td>
-              <td class="cost-buy">- 50% del valore</td>
-              <td class="cost-rent">Nessun rischio</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive-wrapper">
+          <table class="convenienza-table">
+            <thead>
+              <tr>
+                <th>Costi stimati su 3 anni</th>
+                <th>Acquistare</th>
+                <th>Noleggiare con Sambo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cost-label">Prezzo E-Bike Premium</td>
+                <td class="cost-buy">€ 4.500 - € 6.000</td>
+                <td class="cost-rent">da € 25</td>
+              </tr>
+              <tr>
+                <td class="cost-label">Manutenzione e Usura <small>(Freni, catena, software)</small></td>
+                <td class="cost-buy">€ 150 / anno</td>
+                <td class="cost-rent">Inclusa</td>
+              </tr>
+              <tr>
+                <td class="cost-label">Decadimento della Batteria <small>(Sostituzione dopo 3 anni)</small></td>
+                <td class="cost-buy">€ 600 - € 800</td>
+                <td class="cost-rent">Sempre al 100%</td>
+              </tr>
+              <tr>
+                <td class="cost-label">Accessori obbligatori <small>(Casco, portabici, lucchetto)</small></td>
+                <td class="cost-buy">€ 250</td>
+                <td class="cost-rent">Inclusi</td>
+              </tr>
+              <tr class="total-row">
+                <td class="cost-label">Svalutazione del mezzo <small>(Dopo 3 anni)</small></td>
+                <td class="cost-buy">- 50% del valore</td>
+                <td class="cost-rent">Nessun rischio</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <!-- LATO DESTRO: Le 3 Grandi Verità (I punti di dolore) -->
+      <!-- LATO DESTRO: Le 3 Grandi Verità -->
       <div class="convenienza-reasons">
         
         <div class="reason-card">
@@ -99,17 +101,18 @@
 <style>
   .convenienza-section {
     width: 100%;
-    background-color: #1D1D1D; /* Sfondo leggermente rialzato rispetto al nero fumo di fondo */
+    background-color: #1D1D1D;
     color: #ffffff;
-    padding: 140px 62px;
+    padding: 140px 40px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     border-top: 1px solid rgba(255, 255, 255, 0.03);
     position: relative;
     z-index: 10;
+    box-sizing: border-box;
   }
 
   .container-convenienza {
-    max-width: 100%;
+    max-width: 1350px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -127,6 +130,8 @@
     font-weight: 700;
     letter-spacing: 2px;
     color: #dbff9b;
+    border: 1px solid rgba(219, 255, 155, 0.15);
+    background: rgba(219, 255, 155, 0.02);
     padding: 6px 14px;
     border-radius: 50px;
     display: inline-block;
@@ -167,10 +172,26 @@
     width: 100%;
     background: #111111;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 30px;
+    border-radius: 24px;
+    padding: 35px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
+  }
+
+  /* WRAPPER ATTIVO PER LO SCROLL SU SCHERMI PICCOLI */
+  .table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Momentum scroll liscio su iOS */
+  }
+
+  /* Nasconde la barra di scorrimento brutta su Chrome/Safari/Firefox mantenendo lo scroll funzionante */
+  .table-responsive-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .table-responsive-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   .convenienza-table {
@@ -212,7 +233,7 @@
     display: block;
     font-size: 0.8rem;
     color: #555555;
-    margin-top: 2px;
+    margin-top: 4px;
   }
 
   .cost-buy {
@@ -238,11 +259,11 @@
   }
 
   .reason-num {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: #dbff9b;
-    background: rgba(219, 255, 155, 0.03);
-    border: 1px solid rgba(219, 255, 155, 0.1);
+    background: rgba(219, 255, 155, 0.02);
+    border: 1px solid rgba(219, 255, 155, 0.12);
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -253,7 +274,7 @@
   }
 
   .reason-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: #ffffff;
     margin: 0 0 8px 0;
@@ -269,7 +290,8 @@
 
   /* SCATOLA DEL VERDETTO FINALE */
   .convenienza-conclusion {
-    border: none;
+    background: rgba(219, 255, 155, 0.02);
+    border: 1px solid rgba(219, 255, 155, 0.08);
     padding: 24px 30px;
     border-radius: 16px;
     max-width: 100%;
@@ -288,22 +310,45 @@
   }
 
   /* ==========================================
-     RESPONSIVE DESIGN
+     MEDIA QUERIES (RESPONSIVE DI PRECISIONE)
      ========================================== */
+  @media (max-width: 1200px) {
+    .convenienza-grid { gap: 40px; }
+  }
+
   @media (max-width: 1024px) {
     .convenienza-section { padding: 100px 32px; }
-    .convenienza-grid { grid-template-columns: 1fr; gap: 50px; }
-    .table-container { padding: 24px; }
+    .convenienza-grid { grid-template-columns: 1fr; gap: 60px; }
+    .table-container { padding: 30px; }
   }
 
   @media (max-width: 768px) {
     .convenienza-section { padding: 80px 20px; }
     .convenienza-title { font-size: 2.2rem; }
-    .convenienza-grid { gap: 40px; }
-    .convenienza-table th, .convenienza-table td { font-size: 0.9rem; padding: 16px 0; }
-    .cost-label small { display: none; } /* Allegerisce la tabella sui piccoli schermi */
-    .reason-card { gap: 15px; }
-    .reason-num { width: 40px; height: 40px; font-size: 1.2rem; }
-    .convenienza-conclusion p { font-size: 0.95rem; }
+    .convenienza-grid { gap: 48px; }
+    
+    .table-container {
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    /* ALLINEAMENTO TABELLA SCROLLABILE SU MOBILE */
+    .convenienza-table {
+      min-width: 580px; /* Impone una larghezza minima strutturata per attivare lo scroll senza schiacciare i testi */
+    }
+
+    .convenienza-table th, .convenienza-table td { 
+      font-size: 0.9rem; 
+      padding: 16px 8px; /* Aggiunto padding orizzontale interno di sicurezza per lo scroll */
+    }
+
+    .convenienza-table td small {
+      font-size: 0.75rem;
+    }
+    
+    .reason-card { gap: 16px; }
+    .reason-num { width: 40px; height: 40px; font-size: 1.1rem; }
+    .reason-content h3 { font-size: 1.15rem; }
+    .convenienza-conclusion p { font-size: 0.95rem; line-height: 1.6; }
   }
 </style>
